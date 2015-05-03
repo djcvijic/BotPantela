@@ -8,83 +8,83 @@ class GameStatus
 {
 private:
 	//attributes
-	bool p_repostavi;
-	bool p_homePlaysOnRight;
-	int p_homeGoals;
-	int p_awayGoals;
-	bool p_homeKicksOff;
-	int p_mainCounter;
-	int p_homeAttacksOnRight; // +-1  // ***
+	bool m_reset;
+	bool m_homePlaysOnRight;
+	int m_homeGoals;
+	int m_awayGoals;
+	bool m_homeKicksOff;
+	int m_mainCounter;
+	int m_homeAttacksOnRight; // +-1  // ***
 
 public:
 	//constructor
 	GameStatus ()
 	{
-		p_repostavi=false;
-		p_homePlaysOnRight=false;
-		p_homeGoals=0;
-		p_awayGoals=0;
-		p_homeKicksOff=false;
-		p_mainCounter=0;
-		p_homeAttacksOnRight = 1; // oppozite to p_homePlaysOnRight // ***
+		m_reset=false;
+		m_homePlaysOnRight=false;
+		m_homeGoals=0;
+		m_awayGoals=0;
+		m_homeKicksOff=false;
+		m_mainCounter=0;
+		m_homeAttacksOnRight = 1; // opposite to m_homePlaysOnRight // ***
 	}
-	//postaviters
-	void postaviRepostavi (const bool repostavi)
+	//setters
+	void setReset (const bool reset)
 	{
-		p_repostavi=repostavi;
+		m_reset=reset;
 	}
-	void postaviHomePlaysOnRight (const bool homePlaysOnRight)
+	void setHomePlaysOnRight (const bool homePlaysOnRight)
 	{
-		p_homePlaysOnRight=homePlaysOnRight;
+		m_homePlaysOnRight=homePlaysOnRight;
 	}
-	void postaviHomeGoals (const int homeGoals)
+	void setHomeGoals (const int homeGoals)
 	{
-		p_homeGoals=homeGoals;
+		m_homeGoals=homeGoals;
 	}
-	void postaviAwayGoals (const int awayGoals)
+	void setAwayGoals (const int awayGoals)
 	{
-		p_awayGoals=awayGoals;
+		m_awayGoals=awayGoals;
 	}
-	void postaviHomeKicksOff (const bool homeKicksOff)
+	void setHomeKicksOff (const bool homeKicksOff)
 	{
-		p_homeKicksOff=homeKicksOff;
+		m_homeKicksOff=homeKicksOff;
 	}
-	void postaviMainCounter (const bool mainCounter)
+	void setMainCounter (const bool mainCounter)
 	{
-		p_mainCounter=mainCounter;
+		m_mainCounter=mainCounter;
 	}
-	void postaviHomeAttacksOnRight (const int homeAttacksOnRight)
+	void setHomeAttacksOnRight (const int homeAttacksOnRight)
 	{
-		p_homeAttacksOnRight = homeAttacksOnRight;
+		m_homeAttacksOnRight = homeAttacksOnRight;
 	}
-	//dohvatiters
-	bool dohvatiRepostavi () const
+	//getters
+	bool getReset () const
 	{
-		return p_repostavi;
+		return m_reset;
 	}
-	bool dohvatiHomePlaysOnRight () const
+	bool getHomePlaysOnRight () const
 	{
-		return p_homePlaysOnRight;
+		return m_homePlaysOnRight;
 	}
-	int dohvatiHomeGoals ()
+	int getHomeGoals ()
 	{
-		return p_homeGoals;
+		return m_homeGoals;
 	}
-	int dohvatiAwayGoals ()
+	int getAwayGoals ()
 	{
-		return p_awayGoals;
+		return m_awayGoals;
 	}
-	bool dohvatiHomeKicksOff ()
+	bool getHomeKicksOff ()
 	{
-		return p_homeKicksOff;
+		return m_homeKicksOff;
 	}
-	int dohvatiMainCounter ()
+	int getMainCounter ()
 	{
-		return p_mainCounter;
+		return m_mainCounter;
 	}
-	int dohvatiHomeAttacksOnRight ()
+	int getHomeAttacksOnRight ()
 	{
-		return p_homeAttacksOnRight;
+		return m_homeAttacksOnRight;
 	}
 	//input
 	void inputGameStatus ();

@@ -8,63 +8,63 @@ class Ball
 {
 private:
 	//attributes
-	double p_xpoz;
-	double p_ypoz;
-	double p_xbrz;
-	double p_ybrz;
+	double m_xPos;
+	double m_yPos;
+	double m_xVel;
+	double m_yVel;
 
 public:
 	//constructor
 	Ball ()
 	{
-		p_xpoz=0;
-		p_ypoz=0;
-		p_xbrz=0;
-		p_ybrz=0;
+		m_xPos=0;
+		m_yPos=0;
+		m_xVel=0;
+		m_yVel=0;
 	}
 	Ball (Ball& ball)
 	{
-		p_xpoz = ball.dohvatiXpoz();
-		p_ypoz = ball.dohvatiYpoz();
-		p_xbrz = ball.dohvatiXbrz();
-		p_ybrz = ball.dohvatiYbrz();
+		m_xPos = ball.getXPos();
+		m_yPos = ball.getYPos();
+		m_xVel = ball.getXVel();
+		m_yVel = ball.getYVel();
 	}
-	//postaviters
-	void postaviXpoz (const double xpoz)
+	//setters
+	void setXPos (const double xPos)
 	{
-		p_xpoz=xpoz;
+		m_xPos=xPos;
 	}
-	void postaviYpoz (const double ypoz)
+	void setYPos (const double yPos)
 	{
-		p_ypoz=ypoz;
+		m_yPos=yPos;
 	}
-	void postaviXbrz (const double xbrz)
+	void setXVel (const double xVel)
 	{
-		p_xbrz=xbrz;
+		m_xVel=xVel;
 	}
-	void postaviYbrz (const double ybrz)
+	void setYVel (const double yVel)
 	{
-		p_ybrz=ybrz;
+		m_yVel=yVel;
 	}
-	//dohvatiters
-	double dohvatiXpoz () const
+	//getters
+	double getXPos () const
 	{
-		return p_xpoz;
+		return m_xPos;
 	}
-	double dohvatiYpoz () const
+	double getYPos () const
 	{
-		return p_ypoz;
+		return m_yPos;
 	}
-	double dohvatiXbrz () const
+	double getXVel () const
 	{
-		return p_xbrz;
+		return m_xVel;
 	}
-	double dohvatiYbrz () const
+	double getYVel () const
 	{
-		return p_ybrz;
+		return m_yVel;
 	}
 	//input protocol
-	void inputpoz ();
-	void inputbrz ();
+	void inputPos ();
+	void inputVel ();
 };
 

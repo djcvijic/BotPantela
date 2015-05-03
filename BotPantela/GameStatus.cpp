@@ -1,21 +1,22 @@
 #include "GameStatus.h"
+#include "Vreme.h"
 
 void GameStatus::inputGameStatus ()
 {
-	cin >> p_repostavi;  // <--- OVO SE IZVRSAVA CELU VECNOST !!!
-	if (p_repostavi)
+	cin >> m_reset;  // <--- OVO SE IZVRSAVA CELU VECNOST !!!
+	if (m_reset)
 	{
-		p_mainCounter=0;
-		cin >> p_homePlaysOnRight;
-		cin >> p_homeGoals;
-		cin >> p_awayGoals;
-		cin >> p_homeKicksOff; // laGenteEstaMuiLoca::WTF()???
+		m_mainCounter=0;
+		cin >> m_homePlaysOnRight;
+		cin >> m_homeGoals;
+		cin >> m_awayGoals;
+		cin >> m_homeKicksOff; // laGenteEstaMuiLoca::WTF()???
 
-		if (0 == p_homePlaysOnRight) postaviHomeAttacksOnRight(1);
-		else postaviHomeAttacksOnRight(-1);
+		if (0 == m_homePlaysOnRight) setHomeAttacksOnRight(1);
+		else setHomeAttacksOnRight(-1);
 	}
 	else
 	{
-		p_mainCounter++;
+		m_mainCounter++;
 	}
 }

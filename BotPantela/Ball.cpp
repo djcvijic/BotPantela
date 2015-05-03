@@ -2,22 +2,22 @@
 
 using namespace std;
 
-void Ball::inputpoz ()
+void Ball::inputPos ()
 {
-	double xpoz;
-	double ypoz;
-	cin >> xpoz;
-	cin >> ypoz;
-	postaviXpoz(xpoz);
-	postaviYpoz(ypoz);
+	double xPos;
+	double yPos;
+	cin >> xPos;
+	cin >> yPos;
+	setXPos(xPos);
+	setYPos(yPos);
 }
 
-void Ball::inputbrz ()
+void Ball::inputVel ()
 {
-	double xbrz;
-	double ybrz;
-	cin >> xbrz;
-	cin >> ybrz;
-	postaviXbrz(xbrz);
-	postaviYbrz(ybrz);
+	double xVel;
+	double yVel;
+	cin >> xVel;
+	cin >> yVel;
+	setXVel(xVel);
+	setYVel(yVel);
 }

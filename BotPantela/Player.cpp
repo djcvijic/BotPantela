@@ -2,36 +2,36 @@
 
 
 
-void Player::inputpoz () 
+void Player::inputPos () 
 {
-	double xpoz;
-	double ypoz;
-	cin >> xpoz;
-	cin >> ypoz;
-	postaviXpoz(xpoz);
-	postaviYpoz(ypoz);
+	double xPos;
+	double yPos;
+	cin >> xPos;
+	cin >> yPos;
+	setXPos(xPos);
+	setYPos(yPos);
 }
 
 void Player::inputHasKicked ()
 {
 	bool hasKicked;
 	cin >> hasKicked;
-	postaviHasKicked(hasKicked);
+	setHasKicked(hasKicked);
 }
 
 void Player::outputDecisions ()
 {
-	cout << dohvatiWillMove() << endl;
-	if (dohvatiWillMove())
+	cout << getWillMove() << endl;
+	if (getWillMove())
 	{
-		cout << dohvatiDestinationX() << endl;
-		cout << dohvatiDestinationY() << endl;
+		cout << getDestinationX() << endl;
+		cout << getDestinationY() << endl;
 	}
-	cout << dohvatiWillKick() << endl;
-	if (dohvatiWillKick())
+	cout << getWillKick() << endl;
+	if (getWillKick())
 	{
-		cout << dohvatiKickVectorX() << endl;
-		cout << dohvatiKickVectorY() << endl;
-		cout << dohvatiKickIntensity() << endl;
+		cout << getKickVectorX() << endl;
+		cout << getKickVectorY() << endl;
+		cout << getKickIntensity() << endl;
 	}
 }

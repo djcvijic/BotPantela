@@ -8,165 +8,165 @@ class Player
 {
 private:
 	//attributes
-	double p_xpoz;
-	double p_ypoz;
-	bool p_hasKicked;
-	bool p_willMove;
-	double p_destinationX;
-	double p_destinationY;
-	bool p_willKick;
-	double p_kickVectorX;
-	double p_kickVectorY;
-	double p_kickIntensity;
-	double p_pastPointsX[10];
-	double p_pastPointsY[10];
+	double m_xPos;
+	double m_yPos;
+	bool m_hasKicked;
+	bool m_willMove;
+	double m_destinationX;
+	double m_destinationY;
+	bool m_willKick;
+	double m_kickVectorX;
+	double m_kickVectorY;
+	double m_kickIntensity;
+	double m_pastPointsX[10];
+	double m_pastPointsY[10];
 
 public:
 	//constructor
 	Player ()
 	{
-		p_xpoz=0;
-		p_ypoz=0;
-		p_hasKicked=false;
-		p_willMove=false;
-		p_destinationX=0;
-		p_destinationY=0;
-		p_willKick=false;
-		p_kickVectorX=0;
-		p_kickVectorY=0;
-		p_kickIntensity=0;
-		for (int i = 0; i<10; p_pastPointsX[i++] = 0); //p_pastPointsX = {0,0,0,0,0};
-		for (int i = 0; i<10; p_pastPointsY[i++] = 0); //p_pastPointsY = {0,0,0,0,0};
+		m_xPos=0;
+		m_yPos=0;
+		m_hasKicked=false;
+		m_willMove=false;
+		m_destinationX=0;
+		m_destinationY=0;
+		m_willKick=false;
+		m_kickVectorX=0;
+		m_kickVectorY=0;
+		m_kickIntensity=0;
+		for (int i = 0; i<10; m_pastPointsX[i++] = 0); //m_pastPointsX = {0,0,0,0,0};
+		for (int i = 0; i<10; m_pastPointsY[i++] = 0); //m_pastPointsY = {0,0,0,0,0};
 	}
-	//postaviters
-	void postaviXpoz (const double xpoz)
+	//setters
+	void setXPos (const double xPos)
 	{
-		p_xpoz=xpoz;
+		m_xPos=xPos;
 	}
-	void postaviYpoz (const double ypoz)
+	void setYPos (const double yPos)
 	{
-		p_ypoz=ypoz;
+		m_yPos=yPos;
 	}
-	void postaviHasKicked (const bool HasKicked)
+	void setHasKicked (const bool HasKicked)
 	{
-		p_hasKicked=HasKicked;
+		m_hasKicked=HasKicked;
 	}
-	void postaviWillMove (const bool willMove)
+	void setWillMove (const bool willMove)
 	{
-		p_willMove=willMove;
+		m_willMove=willMove;
 	}
-	void postaviDestinationX (const double destinationX)
+	void setDestinationX (const double destinationX)
 	{
-		p_destinationX=destinationX;
+		m_destinationX=destinationX;
 	}
-	void postaviDestinationY (const double destinationY)
+	void setDestinationY (const double destinationY)
 	{
 
-		p_destinationY=destinationY;
+		m_destinationY=destinationY;
 	}
-	void postaviWillKick (const bool willKick)
+	void setWillKick (const bool willKick)
 	{
-		p_willKick=willKick;
+		m_willKick=willKick;
 	}
-	void postaviKickVectorX (const double kickVectorX)
+	void setKickVectorX (const double kickVectorX)
 	{
-		p_kickVectorX=kickVectorX;
+		m_kickVectorX=kickVectorX;
 	}
-	void postaviKickVectorY (const double kickVectorY)
+	void setKickVectorY (const double kickVectorY)
 	{
-		p_kickVectorY=kickVectorY;
+		m_kickVectorY=kickVectorY;
 	}
-	void postaviKickIntensity (const double kickIntensity)
+	void setKickIntensity (const double kickIntensity)
 	{
-		p_kickIntensity=kickIntensity;
+		m_kickIntensity=kickIntensity;
 	} 
 
-	void postaviPastpoz ()
+	void setPastPos ()
 	{
 		for (int i=0;i<9;i++) 
 			{
-				p_pastPointsX[i]=p_pastPointsX[i+1];
-				p_pastPointsY[i]=p_pastPointsY[i+1];
+				m_pastPointsX[i]=m_pastPointsX[i+1];
+				m_pastPointsY[i]=m_pastPointsY[i+1];
 		    }
-		p_pastPointsX[9] = p_xpoz;
-		p_pastPointsY[9] = p_ypoz;
+		m_pastPointsX[9] = m_xPos;
+		m_pastPointsY[9] = m_yPos;
 		
 	}
 
-	//dohvatiters
-	double dohvatiXpoz () const
+	//getters
+	double getXPos () const
 	{
-		return p_xpoz;
+		return m_xPos;
 	}
-	double dohvatiYpoz () const
+	double getYPos () const
 	{
-		return p_ypoz;
+		return m_yPos;
 	}
-	bool dohvatiHasKicked () const
+	bool getHasKicked () const
 	{
-		return p_hasKicked;
+		return m_hasKicked;
 	}
-	bool dohvatiWillMove () const
+	bool getWillMove () const
 	{
-		return p_willMove;
+		return m_willMove;
 	}
-	double dohvatiDestinationX () const
+	double getDestinationX () const
 	{
-		return p_destinationX;
+		return m_destinationX;
 	}
-	double dohvatiDestinationY () const
+	double getDestinationY () const
 	{
-		return p_destinationY;
+		return m_destinationY;
 	}
-	bool dohvatiWillKick () const
+	bool getWillKick () const
 	{
-		return p_willKick;
+		return m_willKick;
 	}
-	double dohvatiKickVectorX () const
+	double getKickVectorX () const
 	{
-		return p_kickVectorX;
+		return m_kickVectorX;
 	}
-	double dohvatiKickVectorY () const
+	double getKickVectorY () const
 	{
-		return p_kickVectorY;
+		return m_kickVectorY;
 	}
-	double dohvatiKickIntensity () const
+	double getKickIntensity () const
 	{
-		return p_kickIntensity;
+		return m_kickIntensity;
 	}
 	//input protocol
-	void inputpoz ();
+	void inputPos ();
 	void inputHasKicked ();
 	//output protocol
 	void outputDecisions ();
 
 	//other methods
-	double Player::dohvatibrzX ()
+	double Player::getVelX ()
 	{
 		int i=0;
-		double brzX = p_pastPointsX[9] - p_pastPointsX[8],
-			brzXPret = p_pastPointsX[8] - p_pastPointsX[7];
-		while ((abs(brzX - brzXPret) > 0.25) && (i<=6) && (abs(brzX) > abs(brzXPret)))
+		double velX = m_pastPointsX[9] - m_pastPointsX[8],
+			velXPret = m_pastPointsX[8] - m_pastPointsX[7];
+		while ((abs(velX - velXPret) > 0.25) && (i<=6) && (abs(velX) > abs(velXPret)))
 		{
-			brzX = brzXPret;
-			brzXPret = p_pastPointsX[9-i-2] - p_pastPointsX[9-i-3];
+			velX = velXPret;
+			velXPret = m_pastPointsX[9-i-2] - m_pastPointsX[9-i-3];
 			i++;
 		};
-		return brzX;
+		return velX;
 	}
 
-	double Player::dohvatibrzY ()
+	double Player::getVelY ()
 	{
 		int i=0;
-		double brzY = p_pastPointsY[9] - p_pastPointsY[8],
-			brzYPret = p_pastPointsY[8] - p_pastPointsY[7];
-		while ((abs(brzY - brzYPret) > 0.25) && (i<=6) && (abs(brzY) > abs(brzYPret)))
+		double velY = m_pastPointsY[9] - m_pastPointsY[8],
+			velYPret = m_pastPointsY[8] - m_pastPointsY[7];
+		while ((abs(velY - velYPret) > 0.25) && (i<=6) && (abs(velY) > abs(velYPret)))
 		{
-			brzY = brzYPret;
-			brzYPret = p_pastPointsY[9-i-2] - p_pastPointsY[9-i-3];
+			velY = velYPret;
+			velYPret = m_pastPointsY[9-i-2] - m_pastPointsY[9-i-3];
 			i++;
 		}
-		return brzY;
+		return velY;
 	}
 
 };

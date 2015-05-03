@@ -55,13 +55,13 @@ int main ()
 		//10 //20 //30 //40
 		gameStatus.inputGameStatus();
 		//50 //60 //70 //80
-		homePlayer1.inputpoz();
-		homePlayer2.inputpoz();
-		awayPlayer1.inputpoz();
-		awayPlayer2.inputpoz();
+		homePlayer1.inputPos();
+		homePlayer2.inputPos();
+		awayPlayer1.inputPos();
+		awayPlayer2.inputPos();
 		//90 //100 //110 //120
-		ball.inputpoz();
-		ball.inputbrz();
+		ball.inputPos();
+		ball.inputVel();
 		//130 //140 //150
 		homePlayer1.inputHasKicked();
 		homePlayer2.inputHasKicked();
@@ -81,12 +81,18 @@ int main ()
 
 		//start calc
 
-		if ((ball.dohvatiXpoz()>0) && (ball.dohvatiXpoz()<k_fieldLength)) mainMainCounter++;
+		if ((ball.getXPos()>0) && (ball.getXPos()<g_fieldLength)) mainMainCounter++;
 
-		if ((mainMainCounter<6000) && gameStatus.dohvatiRepostavi() && stratFlipFlop)
+		if ((mainMainCounter<6000) && gameStatus.getReset() && stratFlipFlop)
 		{
 			stratFlipFlop = false;
 			strat = rand() % 12;
+			if (strat < 12)
+			{
+				pohotnostRand = strat % 3;
+				pozicioniranjeRand = strat % 2;
+				dodavanjeRand = strat / 6;
+			}
 		}
 
 		if (mainMainCounter >= 6000)
@@ -116,34 +122,30 @@ int main ()
 			}
 		}
 
-		pohotnostRand = strat % 3;
-		pozicioniranjeRand = strat % 2;
-		dodavanjeRand = strat / 6;
-
 //Vreme::Primerak()->postaviPrviTajmer();
 
 
-  homePlayer1.postaviWillMove(true);                    // *** 
-  homePlayer1.postaviWillKick(true);
-  homePlayer2.postaviWillMove(true);
-  homePlayer2.postaviWillKick(true);
+  homePlayer1.setWillMove(true);                    // *** 
+  homePlayer1.setWillKick(true);
+  homePlayer2.setWillMove(true);
+  homePlayer2.setWillKick(true);
 
   // potrebno da bi se izracunavala brzina igraca:
-  homePlayer1.postaviPastpoz();
-  homePlayer2.postaviPastpoz();
-  awayPlayer1.postaviPastpoz();
-  awayPlayer2.postaviPastpoz();
+  homePlayer1.setPastPos();
+  homePlayer2.setPastPos();
+  awayPlayer1.setPastPos();
+  awayPlayer2.setPastPos();
 
 
 
 
 
-         odrediTackuPresretanja(homePlayer1,ball,px0,py0,vremePr0,presreci01,presreci02,presreci03,0);
+         odrediTackuPresretanja(homePlayer1,ball,px0,py0,vremePr0,presreci01,presreci02,presreci03,3);
 		 odrediTackuPresretanja(homePlayer2,ball,px1,py1,vremePr1,presreci11,presreci12,presreci13,0);
 		 odrediTackuPresretanja(awayPlayer1,ball,px2,py2,vremePr2,presreci21,presreci22,presreci23,0);
 		 odrediTackuPresretanja(awayPlayer2,ball,px3,py3,vremePr3,presreci31,presreci32,presreci33,0);
 
-		 //LogFajl << vremePr0 << " " << vremePr3 << " " << vectorDistance(ball.dohvatiXpoz(), ball.dohvatiYpoz(), homePlayer1.dohvatiXpoz(), homePlayer1.dohvatiYpoz()) << " " << vectorDistance(ball.dohvatiXpoz(), ball.dohvatiYpoz(), awayPlayer2.dohvatiXpoz(), awayPlayer2.dohvatiYpoz()) << " " ;
+		 //LogFajl << vremePr0 << " " << vremePr3 << " " << vectorDistance(ball.getXPos(), ball.getYPos(), homePlayer1.getXPos(), homePlayer1.getYPos()) << " " << vectorDistance(ball.getXPos(), ball.getYPos(), awayPlayer2.getXPos(), awayPlayer2.getYPos()) << " " ;
 
 		 double niz[4] = {vremePr0,vremePr1,vremePr2,vremePr3};
 
@@ -164,13 +166,13 @@ int main ()
   //if (0 == koCePrvi) {destX = px0; destY = py0;}else
    odrediKretanjeGolmana (homePlayer1,homePlayer2,awayPlayer1,awayPlayer2,koCePrvi,ball,destX,destY,px0,py0,pohotnostRand);
 
-  homePlayer1.postaviDestinationX(destX);  
-  homePlayer1.postaviDestinationY(destY);  
+  homePlayer1.setDestinationX(destX);  
+  homePlayer1.setDestinationY(destY);  
 
-  //if (sqrt(pow((homePlayer2.dohvatiXpoz()-ball.dohvatiXpoz()),2)+pow((homePlayer2.dohvatiYpoz()-ball.dohvatiYpoz()),2)) < 40) // ***
+  //if (sqrt(pow((homePlayer2.getXPos()-ball.getXPos()),2)+pow((homePlayer2.getYPos()-ball.getYPos()),2)) < 40) // ***
   //{
-	 // homePlayer1.postaviDestinationX(500);
-	 // homePlayer2.postaviDestinationY(200);
+	 // homePlayer1.setDestinationX(500);
+	 // homePlayer2.setDestinationY(200);
   //}
 
  
@@ -186,41 +188,38 @@ int main ()
 
 	if (true == (presreci11 || presreci12 || presreci13))  // moze i samo true == presreci 13
 	{
-		homePlayer2.postaviDestinationX(pX);
-		homePlayer2.postaviDestinationY(pY);
+		homePlayer2.setDestinationX(pX);
+		homePlayer2.setDestinationY(pY);
 	}
 	else
 	{
-		double kLH, nLH,xLH,yLH;
-		odrediKiN(kLH,nLH,ball);
-		odrediTackuOdbijanja(kLH,nLH,xLH,yLH,ball);
-		homePlayer2.postaviDestinationX(xLH);       // ball.dohvatiXpoz()
-		homePlayer2.postaviDestinationY(yLH);       // ball.dohvatiYpoz()
+		homePlayer2.setDestinationX(homePlayer2.getXPos());       // ball.getXPos()
+		homePlayer2.setDestinationY(homePlayer2.getYPos());       // ball.getYpos()
 	}
 
- Player awayGoalie = ((awayPlayer1.dohvatiXpoz() > awayPlayer2.dohvatiXpoz()) ? awayPlayer1 : awayPlayer2);
- int AGIndex = ((awayPlayer1.dohvatiXpoz() > awayPlayer2.dohvatiXpoz()) ? 2 : 3);
+ Player awayGoalie = ((awayPlayer1.getXPos() > awayPlayer2.getXPos()) ? awayPlayer1 : awayPlayer2);
+ int AGIndex = ((awayPlayer1.getXPos() > awayPlayer2.getXPos()) ? 2 : 3);
  //LogFajl << " AGIndex " << AGIndex << "  koCePrvi " << koCePrvi << " " ; 
  
  if ((koCePrvi != 1) && (koCePrvi != AGIndex) && (pozicioniranjeRand == 1))
  {
   //LogFajl << " DA ";
-  homePlayer2.postaviDestinationX((awayPlayer1.dohvatiXpoz() + awayPlayer2.dohvatiXpoz()) / 2);
-  homePlayer2.postaviDestinationY((awayPlayer1.dohvatiYpoz() + awayPlayer2.dohvatiYpoz()) / 2);
+  homePlayer2.setDestinationX((awayPlayer1.getXPos() + awayPlayer2.getXPos()) / 2);
+  homePlayer2.setDestinationY((awayPlayer1.getYPos() + awayPlayer2.getYPos()) / 2);
  }
 
- if (((0 == koCePrvi) && (awayGoalie.dohvatiXpoz() > k_fieldLength - 150) && (abs(awayGoalie.dohvatiYpoz()) < 150)) && (pozicioniranjeRand==0))
+ if (((0 == koCePrvi) && (awayGoalie.getXPos() > g_fieldLength - 150) && (abs(awayGoalie.getYPos()) < 150)) && (pozicioniranjeRand==0))
  {
   //LogFajl << " DA ";
-  homePlayer2.postaviDestinationX(awayGoalie.dohvatiXpoz() - 30);
-  homePlayer2.postaviDestinationY(-1*awayGoalie.dohvatiYpoz());
+  homePlayer2.setDestinationX(awayGoalie.getXPos() - 30);
+  homePlayer2.setDestinationY(-1*awayGoalie.getYPos());
  }
- if(((0 == koCePrvi) && (!((awayGoalie.dohvatiXpoz() > k_fieldLength - 150) && (abs(awayGoalie.dohvatiYpoz()) < 150)))) && (pozicioniranjeRand==0))
+ if(((0 == koCePrvi) && (!((awayGoalie.getXPos() > g_fieldLength - 150) && (abs(awayGoalie.getYPos()) < 150)))) && (pozicioniranjeRand==0))
  {
-  homePlayer2.postaviDestinationX(awayGoalie.dohvatiXpoz() + 60);
-  homePlayer2.postaviDestinationY(-1*awayGoalie.dohvatiYpoz());
-  //homePlayer2.postaviDestinationX((awayPlayer1.dohvatiXpoz() + awayPlayer2.dohvatiXpoz()) / 2);
-  //homePlayer2.postaviDestinationY((awayPlayer1.dohvatiYpoz() + awayPlayer2.dohvatiYpoz()) / 2);
+  homePlayer2.setDestinationX(awayGoalie.getXPos() + 60);
+  homePlayer2.setDestinationY(-1*awayGoalie.getYPos());
+  //homePlayer2.setDestinationX((awayPlayer1.getXPos() + awayPlayer2.getXPos()) / 2);
+  //homePlayer2.setDestinationY((awayPlayer1.getYPos() + awayPlayer2.getYPos()) / 2);
  }
   
 
@@ -235,42 +234,42 @@ int main ()
 
 	sutUgol(ball,awayPlayer1,awayPlayer2,xkick,ykick,intenzitet,mozeSigurno);
 
-   //LogFajl << koCePrvi << " " << postaviw(15) ;
+   //LogFajl << koCePrvi << " " << setw(15) ;
    
   if (mozeSigurno)
   {//LogFajl << "Sut Sigurica";
-	homePlayer1.postaviKickVectorX(xkick);  //**********
-	homePlayer1.postaviKickVectorY(ykick);  //**********
-	homePlayer1.postaviKickIntensity(intenzitet); // treba 100 za precisionShotMax
+	homePlayer1.setKickVectorX(xkick);  //**********
+	homePlayer1.setKickVectorY(ykick);  //**********
+	homePlayer1.setKickIntensity(intenzitet); // treba 100 za precisionShotMax
 
-	homePlayer2.postaviKickVectorX(xkick);
-	homePlayer2.postaviKickVectorY(ykick);
-	homePlayer2.postaviKickIntensity(intenzitet);
+	homePlayer2.setKickVectorX(xkick);
+	homePlayer2.setKickVectorY(ykick);
+	homePlayer2.setKickIntensity(intenzitet);
   }
   else
   {
 	  bool mozeVodjenje; double xkickV,ykickV,intenzitetV;
-	  if (sqrt(pow((homePlayer1.dohvatiXpoz()-ball.dohvatiXpoz()),2)+pow((homePlayer1.dohvatiYpoz()-ball.dohvatiYpoz()),2)) < sqrt(pow((homePlayer2.dohvatiXpoz()-ball.dohvatiXpoz()),2)+pow((homePlayer2.dohvatiYpoz()-ball.dohvatiYpoz()),2)))
-    vodiLoptu(k_fieldLength,0,ball,homePlayer1,awayPlayer1,awayPlayer2,xkickV,ykickV,intenzitetV,mozeVodjenje);
-	  else vodiLoptu(k_fieldLength,0,ball,homePlayer2,awayPlayer1,awayPlayer2,xkickV,ykickV,intenzitetV,mozeVodjenje);
+	  if (sqrt(pow((homePlayer1.getXPos()-ball.getXPos()),2)+pow((homePlayer1.getYPos()-ball.getYPos()),2)) < sqrt(pow((homePlayer2.getXPos()-ball.getXPos()),2)+pow((homePlayer2.getYPos()-ball.getYPos()),2)))
+    vodiLoptu(g_fieldLength,0,ball,homePlayer1,awayPlayer1,awayPlayer2,xkickV,ykickV,intenzitetV,mozeVodjenje);
+	  else vodiLoptu(g_fieldLength,0,ball,homePlayer2,awayPlayer1,awayPlayer2,xkickV,ykickV,intenzitetV,mozeVodjenje);
 
 	  
 
 	  if (mozeVodjenje)
    {//LogFajl << "Vodi Loptu";
-    homePlayer1.postaviKickVectorX(xkickV);  
-    homePlayer1.postaviKickVectorY(ykickV);  
-    homePlayer1.postaviKickIntensity(intenzitetV); 
+    homePlayer1.setKickVectorX(xkickV);  
+    homePlayer1.setKickVectorY(ykickV);  
+    homePlayer1.setKickIntensity(intenzitetV); 
 
-    homePlayer2.postaviKickVectorX(xkickV);
-    homePlayer2.postaviKickVectorY(ykickV);
-    homePlayer2.postaviKickIntensity(intenzitetV);
+    homePlayer2.setKickVectorX(xkickV);
+    homePlayer2.setKickVectorY(ykickV);
+    homePlayer2.setKickIntensity(intenzitetV);
    }  
 	  else
 	  {
 			
-			double AP1DoGolmana = vectorDistance(awayPlayer1.dohvatiXpoz(),awayPlayer1.dohvatiYpoz(),homePlayer1.dohvatiXpoz(),homePlayer1.dohvatiYpoz()),
-				AP2DoGolmana = vectorDistance(awayPlayer2.dohvatiXpoz(),awayPlayer2.dohvatiYpoz(),homePlayer1.dohvatiXpoz(),homePlayer1.dohvatiYpoz()),
+			double AP1DoGolmana = vectorDistance(awayPlayer1.getXPos(),awayPlayer1.getYPos(),homePlayer1.getXPos(),homePlayer1.getYPos()),
+				AP2DoGolmana = vectorDistance(awayPlayer2.getXPos(),awayPlayer2.getYPos(),homePlayer1.getXPos(),homePlayer1.getYPos()),
 				bliziDoGolmana = (AP1DoGolmana < AP2DoGolmana) ? AP1DoGolmana : AP2DoGolmana;
 			
 			double dodajX,dodajY,dodajInt;
@@ -280,40 +279,40 @@ int main ()
 
 			if (mozeDodajHP1Spec)
 			{
-				homePlayer1.postaviKickVectorX(dodajX);  //**********
-				homePlayer1.postaviKickVectorY(dodajY);  //**********
-				homePlayer1.postaviKickIntensity(dodajInt);
+				homePlayer1.setKickVectorX(dodajX);  //**********
+				homePlayer1.setKickVectorY(dodajY);  //**********
+				homePlayer1.setKickIntensity(dodajInt);
 			}
 			else
 			{
 				bool mozeDodajHP1 = dodaj(ball,homePlayer1,homePlayer2,awayPlayer1,awayPlayer2,dodajX,dodajY,dodajInt);
 				if (mozeDodajHP1)
 				{//LogFajl << "Dodavanje hp1";
-					homePlayer1.postaviKickVectorX(dodajX);  //**********
-					homePlayer1.postaviKickVectorY(dodajY);  //**********
-					homePlayer1.postaviKickIntensity(dodajInt);
+					homePlayer1.setKickVectorX(dodajX);  //**********
+					homePlayer1.setKickVectorY(dodajY);  //**********
+					homePlayer1.setKickIntensity(dodajInt);
 				}
 				else
 				{
-					homePlayer1.postaviKickVectorX(xkick);  //**********
-					homePlayer1.postaviKickVectorY(ykick);  //**********
-					homePlayer1.postaviKickIntensity(intenzitet); // treba 100 za precisionShotMax
+					homePlayer1.setKickVectorX(xkick);  //**********
+					homePlayer1.setKickVectorY(ykick);  //**********
+					homePlayer1.setKickIntensity(intenzitet); // treba 100 za precisionShotMax
 				}
 			}
 
 			bool mozeDodajHP2 = dodaj(ball,homePlayer2,homePlayer1,awayPlayer1,awayPlayer2,dodajX,dodajY,dodajInt);
 
-			if (mozeDodajHP2 && (homePlayer2.dohvatiXpoz() > (k_fieldLength / (3 - dodavanjeRand)) - k_playerDiameter)  && (bliziDoGolmana > k_fieldLength / 4))
+			if (mozeDodajHP2 && (homePlayer2.getXPos() > (g_fieldLength / (3 - dodavanjeRand)) - g_playerDiameter)  && (bliziDoGolmana > g_fieldLength / 4))
 			{//LogFajl << "Dodavanje hp2";
-				homePlayer2.postaviKickVectorX(dodajX);  //**********
-				homePlayer2.postaviKickVectorY(dodajY);  //**********
-				homePlayer2.postaviKickIntensity(dodajInt);
+				homePlayer2.setKickVectorX(dodajX);  //**********
+				homePlayer2.setKickVectorY(dodajY);  //**********
+				homePlayer2.setKickIntensity(dodajInt);
 			}
 			else
 			{
-				homePlayer2.postaviKickVectorX(xkick);
-				homePlayer2.postaviKickVectorY(ykick);
-				homePlayer2.postaviKickIntensity(intenzitet);
+				homePlayer2.setKickVectorX(xkick);
+				homePlayer2.setKickVectorY(ykick);
+				homePlayer2.setKickIntensity(intenzitet);
 			}
 	  }
   }
@@ -321,21 +320,21 @@ int main ()
  
 
 
-  if (gameStatus.dohvatiRepostavi() == false)
+  if (gameStatus.getReset() == false)
 	  stratFlipFlop = true;
 
-  if ((ball.dohvatiXpoz() > k_fieldLength + k_ballDiameter) && scoreFlipFlop)
+  if ((ball.getXPos() > g_fieldLength + g_ballDiameter) && scoreFlipFlop)
   {
 	  scoreFlipFlop = false;
 	  successCounter[strat]++;
   }
-  if ((ball.dohvatiXpoz() < - k_ballDiameter) && scoreFlipFlop)
+  if ((ball.getXPos() < - g_ballDiameter) && scoreFlipFlop)
   {
 	  scoreFlipFlop = false;
 	  successCounter[strat]--;
   }
 
-  if ((ball.dohvatiXpoz() > 0) && (ball.dohvatiXpoz()<k_fieldLength))
+  if ((ball.getXPos() > 0) && (ball.getXPos()<g_fieldLength))
   {
 	  scoreFlipFlop = true;
   }
@@ -349,22 +348,22 @@ int main ()
     /*LogFajl.is_open() != true) 
 	  LogFajl.open("Izlaz.txt",ios::app);*/
 
-//double bolXbrz = ball.dohvatiXbrz(), bolYbrz = ball.dohvatiYbrz(), homeXpoz = homePlayer1.dohvatiXpoz(), homeYpoz = homePlayer1.dohvatiYpoz();
-//double ka = ball.dohvatiYbrz() / ball.dohvatiXbrz() ;
+//double bolXvel = ball.getXVel(), bolYvel = ball.getYVel(), homeXpos = homePlayer1.getXPos(), homeYpos = homePlayer1.getYPos();
+//double ka = ball.getYVel() / ball.getXVel() ;
 
-	//LogFajl << koCePrvi << " ||| " << px0 << " " << py0 << endl; //<< " ||| " << presreci01 << " ||| " ; //<< homeXpoz << " " << homeYpoz << " ||| " << bolXbrz << " " << bolYbrz << endl ;
-    //LogFajl << ball.dohvatiXbrz() << " " << ball.dohvatiYbrz() << " " << ka << endl;
-	/*LogFajl << " " << koCePrvi << " " << ball.dohvatiXbrz() << " " << ball.dohvatiYbrz() << "  igractackapreseka:   " << vectorDistance(homePlayer1.dohvatiXpoz(),homePlayer1.dohvatiYpoz(),px0,py0) << "   loptatackapreseka  " << vectorDistance(ball.dohvatiXpoz(),ball.dohvatiYpoz(),px0,py0) << "   brzinaigraca  " << vectorLength(homePlayer1.dohvatibrzX(),homePlayer1.dohvatibrzY()) << "  |||| ";
-	LogFajl << "  njihovtackapreseka:   " << vectorDistance(awayPlayer2.dohvatiXpoz(),awayPlayer2.dohvatiYpoz(),px3,py3) << "   loptatackapresekanjihov  " << vectorDistance(ball.dohvatiXpoz(),ball.dohvatiYpoz(),px3,py3) << "   brzinanjihov  " << vectorLength(awayPlayer2.dohvatibrzX(),awayPlayer2.dohvatibrzY()) << endl;*/
+	//LogFajl << koCePrvi << " ||| " << px0 << " " << py0 << endl; //<< " ||| " << presreci01 << " ||| " ; //<< homeXpos << " " << homeYpos << " ||| " << bolXvel << " " << bolYvel << endl ;
+    //LogFajl << ball.getXVel() << " " << ball.getYVel() << " " << ka << endl;
+	/*LogFajl << " " << koCePrvi << " " << ball.getXVel() << " " << ball.getYVel() << "  igractackapreseka:   " << vectorDistance(homePlayer1.getXPos(),homePlayer1.getYPos(),px0,py0) << "   loptatackapreseka  " << vectorDistance(ball.getXPos(),ball.getYPos(),px0,py0) << "   brzinaigraca  " << vectorLength(homePlayer1.getVelX(),homePlayer1.getVelY()) << "  |||| ";
+	LogFajl << "  njihovtackapreseka:   " << vectorDistance(awayPlayer2.getXPos(),awayPlayer2.getYPos(),px3,py3) << "   loptatackapresekanjihov  " << vectorDistance(ball.getXPos(),ball.getYPos(),px3,py3) << "   brzinanjihov  " << vectorLength(awayPlayer2.getVelX(),awayPlayer2.getVelY()) << endl;*/
 
 	//LogFajl << "glavni tajmer:   " << mainMainCounter << "   strategija:   " << strat<< endl;
 
 	//LogFajl <<  vremeGore << " " << vremeDole << " " << vremeDirekt << " " << sut << " "  ;
-	//LogFajl <<  ball.dohvatiXbrz() << " " << ball.dohvatiYbrz() << endl ;
+	//LogFajl <<  ball.getXVel() << " " << ball.getYVel() << endl ;
 		
-		//sqrt(pow(ball.dohvatiXbrz(),2)+pow(ball.dohvatiYbrz(),2)) << endl;               // presreci13 << " " ;     
+		//sqrt(pow(ball.getXVel(),2)+pow(ball.getYVel(),2)) << endl;               // presreci13 << " " ;     
 		
-		//sqrt(pow(ball.dohvatiXbrz(),2)+pow(ball.dohvatiYbrz(),2)) << " ";
+		//sqrt(pow(ball.getXVel(),2)+pow(ball.getYVel(),2)) << " ";
 
   //LogFajl.close(); 
 

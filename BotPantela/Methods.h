@@ -9,58 +9,58 @@
 
      void odrediTackuOdbijanja(const double k, const double n, double& a1,double& b1,Ball& ball)
 	 {
-		 if( (ball.dohvatiXbrz() <= 0) && (ball.dohvatiYbrz() <= 0) )
+		 if( (ball.getXVel() <= 0) && (ball.getYVel() <= 0) )
 		 {
-			 if (n< (-0.5*k_fieldWidth)) 
-			 { a1 = (-0.5*k_fieldWidth-n)/k; b1=-0.5*k_fieldWidth;}
+			 if (n< (-0.5*g_fieldWidth)) 
+			 { a1 = (-0.5*g_fieldWidth-n)/k; b1=-0.5*g_fieldWidth;}
 			 else {a1 = 0; b1 = n;}
 		 }
 
-		 if ( (ball.dohvatiXbrz() <= 0) && (ball.dohvatiYbrz() > 0) )
+		 if ( (ball.getXVel() <= 0) && (ball.getYVel() > 0) )
 		 {
-			 if (n > 0.5*k_fieldWidth)
-			 {a1 = (0.5*k_fieldWidth-n)/k; b1 = 0.5*k_fieldWidth;}
+			 if (n > 0.5*g_fieldWidth)
+			 {a1 = (0.5*g_fieldWidth-n)/k; b1 = 0.5*g_fieldWidth;}
 			 else {a1 = 0; b1 = n;}
 		 }
 
-		 if ( (ball.dohvatiXbrz() > 0) && (ball.dohvatiYbrz() > 0) )
+		 if ( (ball.getXVel() > 0) && (ball.getYVel() > 0) )
 		 {
-			 if (k*k_fieldLength+n<0.5*k_fieldWidth)
-			 {a1 = k_fieldLength; b1 = k*k_fieldLength + n;}
-			 else {b1 = 0.5*k_fieldWidth; a1 = (0.5*k_fieldWidth-n)/k;}
+			 if (k*g_fieldLength+n<0.5*g_fieldWidth)
+			 {a1 = g_fieldLength; b1 = k*g_fieldLength + n;}
+			 else {b1 = 0.5*g_fieldWidth; a1 = (0.5*g_fieldWidth-n)/k;}
 		 }
 
-		 if ( (ball.dohvatiXbrz()>0) && (ball.dohvatiYbrz()<=0) )
+		 if ( (ball.getXVel()>0) && (ball.getYVel()<=0) )
 		 {
-			 if (k*k_fieldLength+n>-0.5*k_fieldWidth)
-			 {a1 = k_fieldLength; b1 = k*k_fieldLength+n;}
-			 else {b1 = -0.5*k_fieldWidth; a1 = (-0.5*k_fieldWidth-n)/k;}
+			 if (k*g_fieldLength+n>-0.5*g_fieldWidth)
+			 {a1 = g_fieldLength; b1 = k*g_fieldLength+n;}
+			 else {b1 = -0.5*g_fieldWidth; a1 = (-0.5*g_fieldWidth-n)/k;}
 		 }
 
-		 /*if (abs(-0.5*k_fieldWidth - b1) < 5) 
+		 /*if (abs(-0.5*g_fieldWidth - b1) < 5) 
 		 {
-			 b1 += k_ballDiameter/2;
+			 b1 += g_ballDiameter/2;
 			 a1 = ((0 == k) ? 10000 : ((b1-n)/k));
 		 }
 		 else
 		 {
-			 if (abs(0.5*k_fieldWidth - b1) < 5)
+			 if (abs(0.5*g_fieldWidth - b1) < 5)
 			 {
-				 b1 -= k_ballDiameter/2;
+				 b1 -= g_ballDiameter/2;
 				 a1 = ((0 == k) ? 10000 : ((b1-n)/k)); 
 			 }
 			 else
 			 {
-				 if (abs(k_fieldLength - a1) < 5)
+				 if (abs(g_fieldLength - a1) < 5)
 				 {
-					 a1 -= k_ballDiameter/2;
+					 a1 -= g_ballDiameter/2;
 					 b1 = k*a1+n;
 				 }
 				 else
 				 {
 					 if (abs(a1) < 5)
 					 {
-						 a1 += k_ballDiameter/2;
+						 a1 += g_ballDiameter/2;
 						 b1 = k*a1+n;
 					 }
 				 }
@@ -69,62 +69,62 @@
 	 }
 
 
-	 void odrediTackuOdbijanja2(const double k, const double n, double& a1,double& b1,double Xbrz, double Ybrz)
+	 void odrediTackuOdbijanja2(const double k, const double n, double& a1,double& b1,double XVel, double YVel)
 	 {
-		 if( (Xbrz <= 0) && (Ybrz <= 0) )
+		 if( (XVel <= 0) && (YVel <= 0) )
 		 {
-			 if (n< (-0.5*k_fieldWidth)) 
-			 { a1 = (-0.5*k_fieldWidth-n)/k; b1=-0.5*k_fieldWidth;}
+			 if (n< (-0.5*g_fieldWidth)) 
+			 { a1 = (-0.5*g_fieldWidth-n)/k; b1=-0.5*g_fieldWidth;}
 			 else {a1 = 0; b1 = n;}
 		 }
 
-		 if ( (Xbrz <= 0) && (Ybrz > 0) )
+		 if ( (XVel <= 0) && (YVel > 0) )
 		 {
-			 if (n > 0.5*k_fieldWidth)
-			 {a1 = (0.5*k_fieldWidth-n)/k; b1 = 0.5*k_fieldWidth;}
+			 if (n > 0.5*g_fieldWidth)
+			 {a1 = (0.5*g_fieldWidth-n)/k; b1 = 0.5*g_fieldWidth;}
 			 else {a1 = 0; b1 = n;}
 		 }
 
-		 if ( (Xbrz > 0) && (Ybrz > 0) )
+		 if ( (XVel > 0) && (YVel > 0) )
 		 {
-			 if (k*k_fieldLength+n<0.5*k_fieldWidth)
-			 {a1 = k_fieldLength; b1 = k*k_fieldLength + n;}
-			 else {b1 = 0.5*k_fieldWidth; a1 = (0.5*k_fieldWidth-n)/k;}
+			 if (k*g_fieldLength+n<0.5*g_fieldWidth)
+			 {a1 = g_fieldLength; b1 = k*g_fieldLength + n;}
+			 else {b1 = 0.5*g_fieldWidth; a1 = (0.5*g_fieldWidth-n)/k;}
 		 }
 
-		 if ( (Xbrz>0) && (Ybrz<=0) )
+		 if ( (XVel>0) && (YVel<=0) )
 		 {
-			 if (k*k_fieldLength+n>-0.5*k_fieldWidth)
-			 {a1 = k_fieldLength; b1 = k*k_fieldLength+n;}
-			 else {b1 = -0.5*k_fieldWidth; a1 = (-0.5*k_fieldWidth-n)/k;}
+			 if (k*g_fieldLength+n>-0.5*g_fieldWidth)
+			 {a1 = g_fieldLength; b1 = k*g_fieldLength+n;}
+			 else {b1 = -0.5*g_fieldWidth; a1 = (-0.5*g_fieldWidth-n)/k;}
 		 }
 
 
 
-		  /*if (abs(-0.5*k_fieldWidth - b1) < 5) 
+		  /*if (abs(-0.5*g_fieldWidth - b1) < 5) 
 		 {
-			 b1 += k_ballDiameter/2;
+			 b1 += g_ballDiameter/2;
 			 a1 = ((0 == k) ? 10000 : ((b1-n)/k));
 		 }
 		 else
 		 {
-			 if (abs(0.5*k_fieldWidth - b1) < 5)
+			 if (abs(0.5*g_fieldWidth - b1) < 5)
 			 {
-				 b1 -= k_ballDiameter/2;
+				 b1 -= g_ballDiameter/2;
 				 a1 = ((0 == k) ? 10000 : ((b1-n)/k));
 			 }
 			 else
 			 {
-				 if (abs(k_fieldLength - a1) < 5)
+				 if (abs(g_fieldLength - a1) < 5)
 				 {
-					 a1 -= k_ballDiameter/2;
+					 a1 -= g_ballDiameter/2;
 					 b1 = k*a1+n;
 				 }
 				 else
 				 {
 					 if (abs(a1) < 5)
 					 {
-						 a1 += k_ballDiameter/2;
+						 a1 += g_ballDiameter/2;
 						 b1 = k*a1+n;
 					 }
 				 }
@@ -139,16 +139,16 @@
 	 void odrediKiN (double& k, double& n, Ball& ball)
 	 {
 		 // odredjivanje vrednosti 'k' i 'n', ovo za 'k' je ovako zajebano da bi se izbeglo deljenje nulom
-  if (0 != ball.dohvatiXbrz()) k = ball.dohvatiYbrz()/ball.dohvatiXbrz();
+  if (0 != ball.getXVel()) k = ball.getYVel()/ball.getXVel();
   else 
   {
-	  if (0 != ball.dohvatiYbrz()) k = 10000;  // 10000 menja beskonacno
+	  if (0 != ball.getYVel()) k = 10000;  // 10000 menja beskonacno
 	  else 
-		  if (0 != ball.dohvatiXpoz()) k = ball.dohvatiYpoz()/ball.dohvatiXpoz();
-		  else k = 1;// mozda ispitati slucaj 0 == ball.dohvatiXpoz()
+		  if (0 != ball.getXPos()) k = ball.getYPos()/ball.getXPos();
+		  else k = 1;// mozda ispitati slucaj 0 == ball.getXPos()
   }
 
-  n = ball.dohvatiYpoz() - k* ball.dohvatiXpoz();
+  n = ball.getYPos() - k* ball.getXPos();
 
 	 }
 
@@ -156,10 +156,10 @@
 
      int ideLiPrema (Player& pl,const double x, const double y)
 	 {
-		 double d1 = sqrt(pow((pl.dohvatiXpoz()-x),2)+pow((pl.dohvatiYpoz()-y),2));
+		 double d1 = sqrt(pow((pl.getXPos()-x),2)+pow((pl.getYPos()-y),2));
 
-		 double xPlImag = pl.dohvatiXpoz() + 2* pl.dohvatibrzX();
-		 double yPlImag = pl.dohvatiYpoz() + 2* pl.dohvatibrzY();
+		 double xPlImag = pl.getXPos() + 2* pl.getVelX();
+		 double yPlImag = pl.getYPos() + 2* pl.getVelY();
 
 		 double d2 = sqrt (pow((xPlImag-x),2)+pow((yPlImag-y),2));
 
@@ -176,10 +176,10 @@
 
 	 double brzinaPremaTacki (Player pl, const double xTek, const double yTek)
 	 {
-		 double d1 = sqrt(pow((pl.dohvatiXpoz()-xTek),2)+pow((pl.dohvatiYpoz()-yTek),2));
+		 double d1 = sqrt(pow((pl.getXPos()-xTek),2)+pow((pl.getYPos()-yTek),2));
 
-		 double xPlImag = pl.dohvatiXpoz() + 2* pl.dohvatibrzX();
-		 double yPlImag = pl.dohvatiYpoz() + 2* pl.dohvatibrzY();
+		 double xPlImag = pl.getXPos() + 2* pl.getVelX();
+		 double yPlImag = pl.getYPos() + 2* pl.getVelY();
 
 		 double d2 = sqrt (pow((xPlImag-xTek),2)+pow((yPlImag-yTek),2));
 
@@ -213,19 +213,19 @@
 		 double vremeLopte,vremeIgraca;
 		 int br = 100;
 
-		 vnula = sqrt(pow(ball.dohvatiXbrz(),2)+pow(ball.dohvatiYbrz(),2));
+		 vnula = sqrt(pow(ball.getXVel(),2)+pow(ball.getYVel(),2));
 		 double t1 = -249.5*log(vnula/7.5);
 		 double t2;
 
 		 Xtek = Xodb ; 
-         for (int i = 0; i<=br; Xtek += (ball.dohvatiXpoz()-Xodb)/br)   //Xtek = Xodb + (i/br)*(ball.dohvatiXpoz()-Xodb
+         for (int i = 0; i<=br; Xtek += (ball.getXPos()-Xodb)/br)   //Xtek = Xodb + (i/br)*(ball.getXPos()-Xodb
 		 {
 			 Ytek = k*Xtek+n;
 
-			 //vnula = sqrt(pow(ball.dohvatiXbrz(),2)+pow(ball.dohvatiYbrz(),2));
+			 //vnula = sqrt(pow(ball.getXVel(),2)+pow(ball.getYVel(),2));
 			 
 			 //double t1 = -249.5*log(vnula/7.5);
-			 S = sqrt (pow((Xtek-ball.dohvatiXpoz()),2)+pow((Ytek-ball.dohvatiYpoz()),2));
+			 S = sqrt (pow((Xtek-ball.getXPos()),2)+pow((Ytek-ball.getYPos()),2));
              
 			 //double t2;
 			 if (249.5*7.5*exp(-t1/249.5)-S > 0) t2 = -249.5*log((249.5*7.5*exp(-t1/249.5)-S)/(249.5*7.5));
@@ -236,7 +236,7 @@
 			 //if (F.is_open() != true) 
 	 // F.open("Izlaz.txt",ios::app);
 
-			double Si = sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) - k_minimalShootingDist + gratis;
+			double Si = sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) - g_minimalShootingDist + gratis;
 			double tejedan,tedva;
 
 			double Sdec,tdec;
@@ -257,8 +257,8 @@
 				if (Si + Sdec < 0) tedva = 0;
 				else tedva = sqrt( (Si+Sdec) / 0.015 + pow(tejedan,2));
 
-				if (tedva > k_playerAccTime)
-					tedva = ( (Si+Sdec) - ((k_playerMaxSpeed + vpoc) * (k_playerAccTime - tejedan) / 2) + k_playerAccTime * k_playerMaxSpeed) / k_playerMaxSpeed;
+				if (tedva > g_playerAccTime)
+					tedva = ( (Si+Sdec) - ((g_playerMaxSpeed + vpoc) * (g_playerAccTime - tejedan) / 2) + g_playerAccTime * g_playerMaxSpeed) / g_playerMaxSpeed;
 			
 
 			}
@@ -268,44 +268,44 @@
 
 				tejedan = vpoc / 0.03;
 				tedva = sqrt(Si / 0.015 + pow(tejedan,2));
-				if (tedva > k_playerAccTime)
-					tedva = (Si - ((k_playerMaxSpeed + vpoc) * (k_playerAccTime - tejedan) / 2) + k_playerAccTime * k_playerMaxSpeed) / k_playerMaxSpeed;
+				if (tedva > g_playerAccTime)
+					tedva = (Si - ((g_playerMaxSpeed + vpoc) * (g_playerAccTime - tejedan) / 2) + g_playerAccTime * g_playerMaxSpeed) / g_playerMaxSpeed;
 			}
 
 			if (Si < 0) vremeIgraca = 0;
 			else vremeIgraca = tedva - tejedan;
 
-	   //       double Si = sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2));
+	   //       double Si = sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2));
     //         
 			 ////F << "k,n,vnula,S,t1,t2,vrl " << k << " " << n << " " << vnula << " " << S << " " << t1 << " " <<t2 << " " << vremeLopte << endl;
-			 //if (Si - k_minimalShootingDist + gratis < k_playerAccDistance)
+			 //if (Si - g_minimalShootingDist + gratis < g_playerAccDistance)
 			 //{
-				//  if (0 == ideLiPrema(pl,Xtek,Ytek)) // ako igrac jos nije poztigao k_playerMaxSpeed
-				//      vremeIgraca = 31.1138*sqrt(0.0643*(Si-k_minimalShootingDist + gratis) + 0.051397)-1.77753; //+ gratis; // 10 je gratis XD // ********** stavi 10
+				//  if (0 == ideLiPrema(pl,Xtek,Ytek)) // ako igrac jos nije postigao g_playerMaxSpeed
+				//      vremeIgraca = 31.1138*sqrt(0.0643*(Si-g_minimalShootingDist + gratis) + 0.051397)-1.77753; //+ gratis; // 10 je gratis XD // ********** stavi 10
 				//  else
 				//  {
 				//	  if (1 == ideLiPrema(pl,Xtek,Ytek)) 
-				//		  vremeIgraca = (Si-k_minimalShootingDist + gratis)/k_playerMaxSpeed ;
+				//		  vremeIgraca = (Si-g_minimalShootingDist + gratis)/g_playerMaxSpeed ;
 				//	  else 
-				//		  if (Si + 23.6 - k_minimalShootingDist+ gratis < k_playerAccDistance)
-				//			  vremeIgraca = 20 + 31.1138*sqrt(0.0643*((Si+23.6)-k_minimalShootingDist+ gratis) + 0.051397)-1.77753 ;
-				//		  else vremeIgraca = ( (Si+23.6) - k_minimalShootingDist + 10) / k_playerMaxSpeed + 0.5*k_playerAccTime;
+				//		  if (Si + 23.6 - g_minimalShootingDist+ gratis < g_playerAccDistance)
+				//			  vremeIgraca = 20 + 31.1138*sqrt(0.0643*((Si+23.6)-g_minimalShootingDist+ gratis) + 0.051397)-1.77753 ;
+				//		  else vremeIgraca = ( (Si+23.6) - g_minimalShootingDist + 10) / g_playerMaxSpeed + 0.5*g_playerAccTime;
 				//  }
 			 //}
 			 //else
 			 //{
-			 //    if (0 == ideLiPrema(pl,Xtek,Ytek)) // ako igrac jos nije poztigao k_playerMaxSpeed
-				//      vremeIgraca = (Si-k_minimalShootingDist+ gratis )/k_playerMaxSpeed + 0.5*k_playerAccTime; 
+			 //    if (0 == ideLiPrema(pl,Xtek,Ytek)) // ako igrac jos nije postigao g_playerMaxSpeed
+				//      vremeIgraca = (Si-g_minimalShootingDist+ gratis )/g_playerMaxSpeed + 0.5*g_playerAccTime; 
 			 //    else 
 		  //  	 {
-				//     if (1 == ideLiPrema(pl,Xtek,Ytek)) vremeIgraca = (Si-k_minimalShootingDist+ gratis )/k_playerMaxSpeed;
-			 //   	 else vremeIgraca = (Si-k_minimalShootingDist+ gratis )/k_playerMaxSpeed + k_playerAccTime; // 69 = 2* 34.5
+				//     if (1 == ideLiPrema(pl,Xtek,Ytek)) vremeIgraca = (Si-g_minimalShootingDist+ gratis )/g_playerMaxSpeed;
+			 //   	 else vremeIgraca = (Si-g_minimalShootingDist+ gratis )/g_playerMaxSpeed + g_playerAccTime; // 69 = 2* 34.5
 			 //    }
 			 //}
 
-			 if ((vremeLopte-vremeIgraca >= -0.01) &&  (vremeLopte <= vremeLopteMin))   // Kriterijum najmanjeg rastojanja bio bi (sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) < distance
+			 if ((vremeLopte-vremeIgraca >= -0.01) &&  (vremeLopte <= vremeLopteMin))   // Kriterijum najmanjeg rastojanja bio bi (sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) < distance
 			 {
-				 distance = sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) ;
+				 distance = sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) ;
 				 vremeLopteMin = vremeLopte;
 				 Xin = Xtek; Yin = Ytek;
 				 vr = vremeIgraca;
@@ -323,10 +323,10 @@
 		 else moze1 = false;
 
 
-		 if (sqrt(pow(ball.dohvatiXbrz(),2)+pow(ball.dohvatiYbrz(),2)) < 1)
+		 if (sqrt(pow(ball.getXVel(),2)+pow(ball.getYVel(),2)) < 1)
 			 {
-				 a1 = ball.dohvatiXpoz(); b1 = ball.dohvatiYpoz(); 
-				 vreme = sqrt(pow((pl.dohvatiXpoz()-ball.dohvatiXpoz()),2)+pow((pl.dohvatiYpoz()-ball.dohvatiYpoz()),2))/k_playerMaxSpeed;
+				 a1 = ball.getXPos(); b1 = ball.getYPos(); 
+				 vreme = sqrt(pow((pl.getXPos()-ball.getXPos()),2)+pow((pl.getYPos()-ball.getYPos()),2))/g_playerMaxSpeed;
 				 moze1 = moze2 = moze3 = true;
 				 return;
 			 }
@@ -337,7 +337,7 @@
 		 {
 			 k = -1*k;
 			 n = Yodb - k*Xodb;
-			 S = sqrt (pow((Xodb-ball.dohvatiXpoz()),2)+pow((Yodb-ball.dohvatiYpoz()),2)); // rastojanje od lopte do tacke gde udara u martinelu
+			 S = sqrt (pow((Xodb-ball.getXPos()),2)+pow((Yodb-ball.getYPos()),2)); // rastojanje od lopte do tacke gde udara u martinelu
              
 			 t1 = -249.5*log(vnula/7.5);
 			 //double t2;
@@ -347,10 +347,10 @@
 			 vremeLopteDoUdara = t2 - t1; // vreme koje ce lopti trebati da udari od martinelu
 
 			 vnovo = 7.5*exp(-1*t2/249.5);
-			 vnovo = 0.5976*vnovo;   // gubi se 40 i nest' pozto pri udaru
+			 vnovo = 0.5976*vnovo;   // gubi se 40 i nest' posto pri udaru
 
 			 double alpha = atan(k);
-			 if ((abs(k_fieldLength - Xodb) < 2) || (abs(0.5*k_fieldWidth - Yodb)<2 && k>0) || (abs(-0.5*k_fieldWidth  - Yodb)<2 && k<0) )
+			 if ((abs(g_fieldLength - Xodb) < 2) || (abs(0.5*g_fieldWidth - Yodb)<2 && k>0) || (abs(-0.5*g_fieldWidth  - Yodb)<2 && k<0) )
 				 alpha += 3.14;
 
 			 double vnovox = vnovo * cos(alpha);
@@ -395,10 +395,10 @@
 	
 	
              
-			 //double Si = sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2));
+			 //double Si = sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2));
              
 			 //F << "k,n,vnula,S,t1,t2,vrl " << k << " " << n << " " << vnula << " " << S << " " << t1 << " " <<t2 << " " << vremeLopte << endl;
-			 double Si = sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) - k_minimalShootingDist +gratis ;
+			 double Si = sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) - g_minimalShootingDist +gratis ;
 			double tejedan,tedva;
 
 			double Sdec,tdec;
@@ -417,8 +417,8 @@
 				if (Si + Sdec < 0) tedva = 0;
 				else tedva = sqrt( (Si+Sdec) / 0.015 + pow(tejedan,2));
 
-				if (tedva > k_playerAccTime)
-					tedva = ( (Si+Sdec) - ((k_playerMaxSpeed + vpoc) * (k_playerAccTime - tejedan) / 2) + k_playerAccTime * k_playerMaxSpeed) / k_playerMaxSpeed;
+				if (tedva > g_playerAccTime)
+					tedva = ( (Si+Sdec) - ((g_playerMaxSpeed + vpoc) * (g_playerAccTime - tejedan) / 2) + g_playerAccTime * g_playerMaxSpeed) / g_playerMaxSpeed;
 			
 
 			}
@@ -428,17 +428,17 @@
 
 				tejedan = vpoc / 0.03;
 				tedva = sqrt(Si / 0.015 + pow(tejedan,2));
-				if (tedva > k_playerAccTime)
-					tedva = (Si - ((k_playerMaxSpeed + vpoc) * (k_playerAccTime - tejedan) / 2) + k_playerAccTime * k_playerMaxSpeed) / k_playerMaxSpeed;
+				if (tedva > g_playerAccTime)
+					tedva = (Si - ((g_playerMaxSpeed + vpoc) * (g_playerAccTime - tejedan) / 2) + g_playerAccTime * g_playerMaxSpeed) / g_playerMaxSpeed;
 			}
 
 			if (Si < 0) vremeIgraca = 0;
 			else vremeIgraca = tedva - tejedan;
 
 
-			 if ((vremeLopte-vremeIgraca > 0) &&  (vremeLopte < vremeLopteMin))   // Kriterijum najmanjeg rastojanja bio bi (sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) < distance
+			 if ((vremeLopte-vremeIgraca > 0) &&  (vremeLopte < vremeLopteMin))   // Kriterijum najmanjeg rastojanja bio bi (sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) < distance
 			 {
-				 distance = sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) ;
+				 distance = sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) ;
 				 vremeLopteMin = vremeLopte;
 				 Xin = Xtek; Yin = Ytek;
 				 vr = vremeIgraca;
@@ -477,10 +477,10 @@
 			 double vremeLopteDoUdara = t2 - t1; // vreme koje ce lopti trebati da udari od martinelu
 
 			 vnovo = 7.5*exp(-0.004*t2);
-			 vnovo = 0.5976*vnovo;   // gubi se 40 i nesto pozto pri udaru
+			 vnovo = 0.5976*vnovo;   // gubi se 40 i nesto posto pri udaru
 
 			 double alpha = atan(k);
-			 if ((abs(k_fieldLength - Xodb) < 2) || (abs(0.5*k_fieldWidth - Yodb)<2 && k>0) || (abs(-0.5*k_fieldWidth - Yodb)<2 && k<0) )
+			 if ((abs(g_fieldLength - Xodb) < 2) || (abs(0.5*g_fieldWidth - Yodb)<2 && k>0) || (abs(-0.5*g_fieldWidth - Yodb)<2 && k<0) )
 				 alpha += 3.14;
 
 			 double vnovox = vnovo * cos(alpha);
@@ -525,7 +525,7 @@
 	
 	
              
-			double Si = sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) - k_minimalShootingDist + gratis;
+			double Si = sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) - g_minimalShootingDist + gratis;
 			double tejedan,tedva;
 
 			double Sdec,tdec;
@@ -544,8 +544,8 @@
 				if (Si + Sdec < 0) tedva = 0;
 				else tedva = sqrt( (Si+Sdec) / 0.015 + pow(tejedan,2));
 
-				if (tedva > k_playerAccTime)
-					tedva = ( (Si+Sdec) - ((k_playerMaxSpeed + vpoc) * (k_playerAccTime - tejedan) / 2) + k_playerAccTime * k_playerMaxSpeed) / k_playerMaxSpeed;
+				if (tedva > g_playerAccTime)
+					tedva = ( (Si+Sdec) - ((g_playerMaxSpeed + vpoc) * (g_playerAccTime - tejedan) / 2) + g_playerAccTime * g_playerMaxSpeed) / g_playerMaxSpeed;
 			
 
 			}
@@ -555,8 +555,8 @@
 
 				tejedan = vpoc / 0.03;
 				tedva = sqrt(Si / 0.015 + pow(tejedan,2));
-				if (tedva > k_playerAccTime)
-					tedva = (Si - ((k_playerMaxSpeed + vpoc) * (k_playerAccTime - tejedan) / 2) + k_playerAccTime * k_playerMaxSpeed) / k_playerMaxSpeed;
+				if (tedva > g_playerAccTime)
+					tedva = (Si - ((g_playerMaxSpeed + vpoc) * (g_playerAccTime - tejedan) / 2) + g_playerAccTime * g_playerMaxSpeed) / g_playerMaxSpeed;
 			}
 
 			if (Si < 0) vremeIgraca = 0;
@@ -568,8 +568,8 @@
 
 				tejedan = 0;
 				tedva = sqrt( (Si+Sdec) / 0.015 + pow(tejedan,2));
-				if (tedva > k_playerAccTime)
-					tedva = ( (Si+Sdec) - ((k_playerMaxSpeed + vpoc) * (k_playerAccTime - tejedan) / 2) + k_playerAccTime * k_playerMaxSpeed) / k_playerMaxSpeed;
+				if (tedva > g_playerAccTime)
+					tedva = ( (Si+Sdec) - ((g_playerMaxSpeed + vpoc) * (g_playerAccTime - tejedan) / 2) + g_playerAccTime * g_playerMaxSpeed) / g_playerMaxSpeed;
 			
 
 			}
@@ -577,37 +577,37 @@
 			{
 				tejedan = vpoc / 0.03;
 				tedva = sqrt(Si / 0.015 + pow(tejedan,2));
-				if (tedva > k_playerAccTime)
-					tedva = (Si - ((k_playerMaxSpeed + vpoc) * (k_playerAccTime - tejedan) / 2) + k_playerAccTime * k_playerMaxSpeed) / k_playerMaxSpeed;
+				if (tedva > g_playerAccTime)
+					tedva = (Si - ((g_playerMaxSpeed + vpoc) * (g_playerAccTime - tejedan) / 2) + g_playerAccTime * g_playerMaxSpeed) / g_playerMaxSpeed;
 			}
 
 			vremeIgraca = tedva - tejedan;*/
-			 //if (Si < k_playerAccDistance)
+			 //if (Si < g_playerAccDistance)
 			 //{
-				//  if (0 == ideLiPrema(pl,Xtek,Ytek)) // ako igrac jos nije poztigao k_playerMaxSpeed
-				//      vremeIgraca = 31.1138*sqrt(0.0643*(Si-k_minimalShootingDist) + 0.051397)-1.77753 + gratis; // 10 je gratis XD // ********** stavi 10
+				//  if (0 == ideLiPrema(pl,Xtek,Ytek)) // ako igrac jos nije postigao g_playerMaxSpeed
+				//      vremeIgraca = 31.1138*sqrt(0.0643*(Si-g_minimalShootingDist) + 0.051397)-1.77753 + gratis; // 10 je gratis XD // ********** stavi 10
 				//  else
 				//  {
 				//	  if (1 == ideLiPrema(pl,Xtek,Ytek)) 
-				//		  vremeIgraca = (Si-k_minimalShootingDist)/k_playerMaxSpeed + gratis;
-				//	  else vremeIgraca = k_playerAccTime + 31.1138*sqrt(0.0643*(Si-k_minimalShootingDist) + 0.051397)-1.77753 + gratis;
+				//		  vremeIgraca = (Si-g_minimalShootingDist)/g_playerMaxSpeed + gratis;
+				//	  else vremeIgraca = g_playerAccTime + 31.1138*sqrt(0.0643*(Si-g_minimalShootingDist) + 0.051397)-1.77753 + gratis;
 				//  }
 			 //}
 			 //else
 			 //{
-			 //    if (0 == ideLiPrema(pl,Xtek,Ytek)) // ako igrac jos nije poztigao k_playerMaxSpeed
-				//      vremeIgraca = (Si-k_minimalShootingDist+10)/k_playerMaxSpeed + 0.5*k_playerAccTime; 
+			 //    if (0 == ideLiPrema(pl,Xtek,Ytek)) // ako igrac jos nije postigao g_playerMaxSpeed
+				//      vremeIgraca = (Si-g_minimalShootingDist+10)/g_playerMaxSpeed + 0.5*g_playerAccTime; 
 			 //    else 
 		  //  	 {
-				//     if (1 == ideLiPrema(pl,Xtek,Ytek)) vremeIgraca = (Si-k_minimalShootingDist+10)/k_playerMaxSpeed;
-			 //   	 else vremeIgraca = (Si-k_minimalShootingDist+10)/k_playerMaxSpeed + k_playerAccTime; // 69 = 2* 34.5
+				//     if (1 == ideLiPrema(pl,Xtek,Ytek)) vremeIgraca = (Si-g_minimalShootingDist+10)/g_playerMaxSpeed;
+			 //   	 else vremeIgraca = (Si-g_minimalShootingDist+10)/g_playerMaxSpeed + g_playerAccTime; // 69 = 2* 34.5
 			 //    }
 			 //}
 
 
-			 if ((vremeLopte-vremeIgraca > 0) &&  (vremeLopte < vremeLopteMin))   // Kriterijum najmanjeg rastojanja bio bi (sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) < distance
+			 if ((vremeLopte-vremeIgraca > 0) &&  (vremeLopte < vremeLopteMin))   // Kriterijum najmanjeg rastojanja bio bi (sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) < distance
 			 {
-				 distance = sqrt(pow((Xtek-pl.dohvatiXpoz()),2)+pow((Ytek-pl.dohvatiYpoz()),2)) ;
+				 distance = sqrt(pow((Xtek-pl.getXPos()),2)+pow((Ytek-pl.getYPos()),2)) ;
 				 vremeLopteMin = vremeLopte;
 				 Xin = Xtek; Yin = Ytek;
 				 vr = vremeIgraca;
@@ -647,32 +647,32 @@
 
 	 //void precisionShotMax (Ball& ball, const double xdest, const double ydest, double& xkick, double& ykick, double& intensity, bool& moze)
 	 //{
-		// double kr = (ydest - ball.dohvatiYpoz())/(xdest - ball.dohvatiXpoz());
-		// double kickbrz = 7.5;
-		// double yv = ball.dohvatiYbrz();
-		// double xv = ball.dohvatiXbrz();
+		// double kr = (ydest - ball.getYPos())/(xdest - ball.getXPos());
+		// double kickvel = 7.5;
+		// double yv = ball.getYVel();
+		// double xv = ball.getXVel();
 
-		// xkick = (kr*yv - pow(kr,2)*xv + sqrt(pow(kickbrz,2)*(pow(kr,2) + 1) - pow((kr*xv - yv),2))) / (pow(kr,2) + 1);
-  //       ykick = (kr*xv - yv + kr*sqrt(pow(kickbrz,2)*(pow(kr,2) + 1) - pow((kr*xv-yv),2))) / (pow(kr,2) + 1);
+		// xkick = (kr*yv - pow(kr,2)*xv + sqrt(pow(kickvel,2)*(pow(kr,2) + 1) - pow((kr*xv - yv),2))) / (pow(kr,2) + 1);
+  //       ykick = (kr*xv - yv + kr*sqrt(pow(kickvel,2)*(pow(kr,2) + 1) - pow((kr*xv-yv),2))) / (pow(kr,2) + 1);
 
-		// if ( (pow(kickbrz,2)*pow(kr,2) + 1 >= 0 ) && ( pow(kickbrz,2)*(pow(kr,2) + 1) - pow((kr*xv-yv),2) >= 0 ) && ( sqrt(pow((xv + xkick),2)+pow((yv + ykick),2)) > 7.49)) //( sqrt(pow((xv + xkick),2)+pow((yv + ykick),2)) > 7.5)
+		// if ( (pow(kickvel,2)*pow(kr,2) + 1 >= 0 ) && ( pow(kickvel,2)*(pow(kr,2) + 1) - pow((kr*xv-yv),2) >= 0 ) && ( sqrt(pow((xv + xkick),2)+pow((yv + ykick),2)) > 7.49)) //( sqrt(pow((xv + xkick),2)+pow((yv + ykick),2)) > 7.5)
 		// {
-		// //xkick = (kr*yv - pow(kr,2)*xv + sqrt(pow(kickbrz,2)*(pow(kr,2) + 1) - pow((kr*xv - yv),2))) / (pow(kr,2) + 1);
-  //       //ykick = (kr*xv - yv + kr*sqrt(pow(kickbrz,2)*(pow(kr,2) + 1) - pow((kr*xv-yv),2))) / (pow(kr,2) + 1);
+		// //xkick = (kr*yv - pow(kr,2)*xv + sqrt(pow(kickvel,2)*(pow(kr,2) + 1) - pow((kr*xv - yv),2))) / (pow(kr,2) + 1);
+  //       //ykick = (kr*xv - yv + kr*sqrt(pow(kickvel,2)*(pow(kr,2) + 1) - pow((kr*xv-yv),2))) / (pow(kr,2) + 1);
 		// moze = true;
 		// intensity = 100;
 		// }
 		// else 
 		// {   // zaustavljanje lopte
-		//	 if (sqrt(pow(ball.dohvatiXbrz(),2)+pow(ball.dohvatiYbrz(),2)) > 7.49)
+		//	 if (sqrt(pow(ball.getXVel(),2)+pow(ball.getYVel(),2)) > 7.49)
 		//	 {
-		//	 xkick = -1*ball.dohvatiXbrz();
-		//	 ykick = -1*ball.dohvatiYbrz();
+		//	 xkick = -1*ball.getXVel();
+		//	 ykick = -1*ball.getYVel();
 		//	 intensity = 100;
 		//	 }
 		//	 else
 		//	 {
-		//		 precisionShot(ball,ball.dohvatiXpoz(),ball.dohvatiYpoz(),0,xkick,ykick,intensity,moze);
+		//		 precisionShot(ball,ball.getXPos(),ball.getYPos(),0,xkick,ykick,intensity,moze);
 		//	 }	
 		//	 moze = false;
 		// }
@@ -684,8 +684,8 @@
   {
    double xrez,yrez;
 
-   xrez = xdest - ball.dohvatiXpoz();
-   yrez = ydest - ball.dohvatiYpoz();
+   xrez = xdest - ball.getXPos();
+   yrez = ydest - ball.getYPos();
    double koef;
 
    if (0 != brzina)
@@ -701,16 +701,16 @@
     yrez = 0;
    }
 
-   xkick = xrez - ball.dohvatiXbrz();
-   ykick = yrez - ball.dohvatiYbrz();
+   xkick = xrez - ball.getXVel();
+   ykick = yrez - ball.getYVel();
    intensity = sqrt(pow(xkick,2)+pow(ykick,2));
 
    if (intensity > 9.99)  // ZAUSTAVLJANJE LOPTE
    {     
     //precisionShotMax(ball,xdest,ydest,xkick,ykick,intensity,moze);
     //intensity = 100;
-    xkick = -1*ball.dohvatiXbrz();
-    ykick = -1*ball.dohvatiYbrz();
+    xkick = -1*ball.getXVel();
+    ykick = -1*ball.getYVel();
     intensity = sqrt(pow(xkick,2)+pow(ykick,2))*10;
     moze = false;
    }
@@ -785,8 +785,8 @@
 		 
 			 double xrez,yrez;
 
-		 xrez = xdest -1*ball.dohvatiXpoz();
-		 yrez = ydest -1*ball.dohvatiYpoz();
+		 xrez = xdest -1*ball.getXPos();
+		 yrez = ydest -1*ball.getYPos();
 		 double koef;
 
 		 koef = sqrt(pow(xrez,2)+pow(yrez,2))/brzina;
@@ -795,8 +795,8 @@
 
 		 Ball fakeBall(ball);
 
-		 fakeBall.postaviXbrz(xrez);
-		 fakeBall.postaviYbrz(yrez);
+		 fakeBall.setXVel(xrez);
+		 fakeBall.setYVel(yrez);
 
 		 double xAw1,yAw1,vremeAw1;
 		 bool mozeAw11,mozeAw12,mozeAw13; 
@@ -848,8 +848,8 @@
 		 
 			 double xrez,yrez;
 
-		 xrez = xdest - ball.dohvatiXpoz();
-		 yrez = ydest -1*ball.dohvatiYpoz();
+		 xrez = xdest - ball.getXPos();
+		 yrez = ydest -1*ball.getYPos();
 		 double koef;
 
 		 koef = sqrt(pow(xrez,2)+pow(yrez,2))/brzina;
@@ -858,11 +858,11 @@
 
 		 Ball fakeBall(ball);
 
-		 fakeBall.postaviXbrz(0.90*xrez);
-		 fakeBall.postaviYbrz(0.90*yrez);
+		 fakeBall.setXVel(0.90*xrez);
+		 fakeBall.setYVel(0.90*yrez);
 
-		 fakeBall.postaviXpoz(fakeBall.dohvatiXpoz()+xrez*15);
-		 fakeBall.postaviYpoz(fakeBall.dohvatiYpoz()+yrez*15);
+		 fakeBall.setXPos(fakeBall.getXPos()+xrez*15);
+		 fakeBall.setYPos(fakeBall.getYPos()+yrez*15);
 
 		 double xAw1,yAw1,vremeAw1;
 		 bool mozeAw11,mozeAw12,mozeAw13; 
@@ -908,14 +908,14 @@
 	 {
 		 double xkick,ykick,intenzitet;
 		 bool mozeLiSut;
-		 precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
+		 precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
 
 		 //if (true == mozeLiSut)
 		 
 			 double xrez,yrez;
 
-		 xrez = xdest - ball.dohvatiXpoz();
-		 yrez = (k_fieldWidth/2 + k_fieldWidth/2 - ydest) -1*ball.dohvatiYpoz();
+		 xrez = xdest - ball.getXPos();
+		 yrez = (g_fieldWidth/2 + g_fieldWidth/2 - ydest) -1*ball.getYPos();
 		 double koef;
 
 		 koef = sqrt(pow(xrez,2)+pow(yrez,2))/7.5;
@@ -924,8 +924,8 @@
 
 		 Ball fakeBall(ball);
 
-		 fakeBall.postaviXbrz(xrez);
-		 fakeBall.postaviYbrz(yrez);
+		 fakeBall.setXVel(xrez);
+		 fakeBall.setYVel(yrez);
 
 		 double xAw1,yAw1,vremeAw1;
 		 bool mozeAw11,mozeAw12,mozeAw13; 
@@ -972,14 +972,14 @@
 	 {
 		 double xkick,ykick,intenzitet;
 		 bool mozeLiSut;
-		 precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
+		 precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
 
 		 //if (true == mozeLiSut)
 		 
 			 double xrez,yrez;
 
-		 xrez = xdest - ball.dohvatiXpoz();
-		 yrez = (-1*k_fieldWidth/2 - (k_fieldWidth/2 + ydest)) -1*ball.dohvatiYpoz();
+		 xrez = xdest - ball.getXPos();
+		 yrez = (-1*g_fieldWidth/2 - (g_fieldWidth/2 + ydest)) -1*ball.getYPos();
 		 double koef;
 
 		 koef = sqrt(pow(xrez,2)+pow(yrez,2))/7.5;
@@ -988,8 +988,8 @@
 
 		 Ball fakeBall(ball);
 
-		 fakeBall.postaviXbrz(xrez);
-		 fakeBall.postaviYbrz(yrez);
+		 fakeBall.setXVel(xrez);
+		 fakeBall.setYVel(yrez);
 
 		 double xAw1,yAw1,vremeAw1;
 		 bool mozeAw11,mozeAw12,mozeAw13; 
@@ -1036,7 +1036,7 @@
 	// {
 	//	  bool moze;
  //  
- //                      //precisionShotMax(ball,k_fieldLength,0,xkick,ykick,intenzitet,moze);
+ //                      //precisionShotMax(ball,g_fieldLength,0,xkick,ykick,intenzitet,moze);
 
  //  bool mozeLiGoreOdma,mozeLiGoreSaZaust;
  //  bool mozeLiDoleOdma,mozeLiDoleSaZaust;
@@ -1060,37 +1060,37 @@
  //  mozeSigurno = true;
 
  //  if (mozeLiDirektOdma || mozeLiDirektSaZaust)
- //  {precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,moze);}// DIREKT
+ //  {precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,moze);}// DIREKT
 
  //  else
  //  {
  //  
  //if (mozeLiDirektGSOdma || mozeLiDirektGSSaZaust)
- //{precisionShot(ball,k_fieldLength,k_goalWidth/4+35,7.5,xkick,ykick,intenzitet,moze); }// DIREKT GS
+ //{precisionShot(ball,g_fieldLength,g_goalWidth/4+35,7.5,xkick,ykick,intenzitet,moze); }// DIREKT GS
 
  //else
  // {
  //   if (mozeLiDirektDSOdma || mozeLiDirektDSSaZaust)
- //   {precisionShot(ball,k_fieldLength,-1*k_goalWidth/4-35,7.5,xkick,ykick,intenzitet,moze); }// DIREKT DS
+ //   {precisionShot(ball,g_fieldLength,-1*g_goalWidth/4-35,7.5,xkick,ykick,intenzitet,moze); }// DIREKT DS
 	//   else
 	//   {
 	//	   if (mozeLiDoleOdma || mozeLiDoleSaZaust)
 	//	   {
-	//		   precisionShot(ball,k_fieldLength,-1*k_fieldWidth,7.5,xkick,ykick,intenzitet,moze);
+	//		   precisionShot(ball,g_fieldLength,-1*g_fieldWidth,7.5,xkick,ykick,intenzitet,moze);
 	//	   }
 	//	   else
 	//		   if (mozeLiGoreOdma || mozeLiGoreSaZaust)
 	//		   {
-	//			   precisionShot(ball,k_fieldLength,k_fieldWidth,7.5,xkick,ykick,intenzitet,moze);
+	//			   precisionShot(ball,g_fieldLength,g_fieldWidth,7.5,xkick,ykick,intenzitet,moze);
 	//		   }
 	//		   else
 	//		   {
 	//	   mozeSigurno = false;
-	//	   if (0 == sut) {precisionShot(ball,k_fieldLength,k_fieldWidth,7.5,xkick,ykick,intenzitet,moze); /*LogFajl << "GORE" << endl;*/} // GORE
-	//	   if (1 == sut) {precisionShot(ball,k_fieldLength,-1*k_fieldWidth,7.5,xkick,ykick,intenzitet,moze);/* LogFajl << "DOLE" << endl;*/}// DOLE
-	//	   if (2 == sut) {precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,moze); /*LogFajl << "DIREKT" << endl;*/}// DIREKT
-	//	   if (3 == sut) {precisionShot(ball,k_fieldLength,k_goalWidth/4+20,7.5,xkick,ykick,intenzitet,moze); }// DIREKT GS
-	//	   if (4 == sut) {precisionShot(ball,k_fieldLength,-1*k_goalWidth/4-20,7.5,xkick,ykick,intenzitet,moze); }// DIREKT DS
+	//	   if (0 == sut) {precisionShot(ball,g_fieldLength,g_fieldWidth,7.5,xkick,ykick,intenzitet,moze); /*LogFajl << "GORE" << endl;*/} // GORE
+	//	   if (1 == sut) {precisionShot(ball,g_fieldLength,-1*g_fieldWidth,7.5,xkick,ykick,intenzitet,moze);/* LogFajl << "DOLE" << endl;*/}// DOLE
+	//	   if (2 == sut) {precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,moze); /*LogFajl << "DIREKT" << endl;*/}// DIREKT
+	//	   if (3 == sut) {precisionShot(ball,g_fieldLength,g_goalWidth/4+20,7.5,xkick,ykick,intenzitet,moze); }// DIREKT GS
+	//	   if (4 == sut) {precisionShot(ball,g_fieldLength,-1*g_goalWidth/4-20,7.5,xkick,ykick,intenzitet,moze); }// DIREKT DS
 	//		   }
 	//   }
 	//}
@@ -1104,14 +1104,14 @@
   {
    double xkick,ykick,intenzitet;
    bool mozeLiSut;
-   precisionShot(ball,k_fieldLength,k_fieldWidth,7.5,xkick,ykick,intenzitet,mozeLiSut);
+   precisionShot(ball,g_fieldLength,g_fieldWidth,7.5,xkick,ykick,intenzitet,mozeLiSut);
 
    //if (true == mozeLiSut)
    
     double xrez,yrez;
 
-   xrez = k_fieldLength - ball.dohvatiXpoz();
-   yrez = k_fieldWidth - ball.dohvatiYpoz();
+   xrez = g_fieldLength - ball.getXPos();
+   yrez = g_fieldWidth - ball.getYPos();
    double koef;
 
    koef = sqrt(pow(xrez,2)+pow(yrez,2))/7.5;
@@ -1120,8 +1120,8 @@
 
    Ball fakeBall(ball);
 
-   fakeBall.postaviXbrz(xrez);
-   fakeBall.postaviYbrz(yrez);
+   fakeBall.setXVel(xrez);
+   fakeBall.setYVel(yrez);
 
    double x,y,vreme;
    bool moze1,moze2,moze3; 
@@ -1168,14 +1168,14 @@ void sutDole(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja, boo
   {
    double xkick,ykick,intenzitet;
    bool mozeLiSut;
-   precisionShot(ball,k_fieldLength,-1*k_fieldWidth,7.5,xkick,ykick,intenzitet,mozeLiSut);
+   precisionShot(ball,g_fieldLength,-1*g_fieldWidth,7.5,xkick,ykick,intenzitet,mozeLiSut);
 
    //if (true == mozeLiSut)
    
     double xrez,yrez;
 
-   xrez = k_fieldLength - ball.dohvatiXpoz();
-   yrez = -1*k_fieldWidth - ball.dohvatiYpoz();
+   xrez = g_fieldLength - ball.getXPos();
+   yrez = -1*g_fieldWidth - ball.getYPos();
    double koef;
 
    koef = sqrt(pow(xrez,2)+pow(yrez,2))/7.5;
@@ -1184,8 +1184,8 @@ void sutDole(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja, boo
 
    Ball fakeBall(ball);
 
-   fakeBall.postaviXbrz(xrez);
-   fakeBall.postaviYbrz(yrez);
+   fakeBall.setXVel(xrez);
+   fakeBall.setYVel(yrez);
 
    double x,y,vreme;
    bool moze1,moze2,moze3; 
@@ -1230,14 +1230,14 @@ void sutDirekt(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja, b
   {
    double xkick,ykick,intenzitet;
    bool mozeLiSut;
-   precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
+   precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
 
    //if (true == mozeLiSut)
    
     double xrez,yrez;
 
-   xrez = k_fieldLength - ball.dohvatiXpoz();
-   yrez =  -1*ball.dohvatiYpoz();
+   xrez = g_fieldLength - ball.getXPos();
+   yrez =  -1*ball.getYPos();
    double koef;
 
    koef = sqrt(pow(xrez,2)+pow(yrez,2))/7.5;
@@ -1246,8 +1246,8 @@ void sutDirekt(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja, b
 
    Ball fakeBall(ball);
 
-   fakeBall.postaviXbrz(xrez);
-   fakeBall.postaviYbrz(yrez);
+   fakeBall.setXVel(xrez);
+   fakeBall.setYVel(yrez);
 
    double x,y,vreme;
    bool moze1,moze2,moze3; 
@@ -1286,14 +1286,14 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
   {
    double xkick,ykick,intenzitet;
    bool mozeLiSut;
-   precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
+   precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
 
    //if (true == mozeLiSut)
    
     double xrez,yrez;
 
-   xrez = k_fieldLength - ball.dohvatiXpoz();
-   yrez = k_goalWidth/4 + 35 -1*ball.dohvatiYpoz();
+   xrez = g_fieldLength - ball.getXPos();
+   yrez = g_goalWidth/4 + 35 -1*ball.getYPos();
    double koef;
 
    koef = sqrt(pow(xrez,2)+pow(yrez,2))/7.5;
@@ -1302,8 +1302,8 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
 
    Ball fakeBall(ball);
 
-   fakeBall.postaviXbrz(xrez);
-   fakeBall.postaviYbrz(yrez);
+   fakeBall.setXVel(xrez);
+   fakeBall.setYVel(yrez);
 
    double x,y,vreme;
    bool moze1,moze2,moze3; 
@@ -1344,14 +1344,14 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
   {
    double xkick,ykick,intenzitet;
    bool mozeLiSut;
-   precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
+   precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,mozeLiSut);
 
    //if (true == mozeLiSut)
    
     double xrez,yrez;
 
-   xrez = k_fieldLength - ball.dohvatiXpoz();
-   yrez = -1*k_goalWidth/4 - 35 -1*ball.dohvatiYpoz();
+   xrez = g_fieldLength - ball.getXPos();
+   yrez = -1*g_goalWidth/4 - 35 -1*ball.getYPos();
    double koef;
 
    koef = sqrt(pow(xrez,2)+pow(yrez,2))/7.5;
@@ -1360,8 +1360,8 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
 
    Ball fakeBall(ball);
 
-   fakeBall.postaviXbrz(xrez);
-   fakeBall.postaviYbrz(yrez);
+   fakeBall.setXVel(xrez);
+   fakeBall.setYVel(yrez);
 
    double x,y,vreme;
    bool moze1,moze2,moze3; 
@@ -1410,15 +1410,15 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
    if (mozeBezZaust || mozeSaZaust) moze = true;
    else moze = false;
 
-   double udaljenostAP1 = vectorLength(ball.dohvatiXpoz() - ap1.dohvatiXpoz() , ball.dohvatiYpoz() - ap1.dohvatiYpoz()) ;
-         double udaljenostAP2 = vectorLength(ball.dohvatiXpoz() - ap2.dohvatiXpoz() , ball.dohvatiYpoz() - ap2.dohvatiYpoz()) ;
+   double udaljenostAP1 = vectorLength(ball.getXPos() - ap1.getXPos() , ball.getYPos() - ap1.getYPos()) ;
+         double udaljenostAP2 = vectorLength(ball.getXPos() - ap2.getXPos() , ball.getYPos() - ap2.getYPos()) ;
          double udaljenostBAP = (udaljenostAP1 < udaljenostAP2) ? udaljenostAP1 : udaljenostAP2;
       Player BAP = (udaljenostAP1 < udaljenostAP2) ? ap1 : ap2;
-      if ((BAP.dohvatiXpoz() > ball.dohvatiXpoz()) && (udaljenostBAP < 2 * k_playerDiameter))
+      if ((BAP.getXPos() > ball.getXPos()) && (udaljenostBAP < 2 * g_playerDiameter))
           moze = false;
 
-   if (sqrt(pow(onajStoVodi.dohvatibrzX() - ball.dohvatiXbrz(),2)+pow(onajStoVodi.dohvatibrzY() - ball.dohvatiYbrz(),2)) > 1)
-    precisionShot(ball,onajStoVodi.dohvatiXpoz()+5*onajStoVodi.dohvatibrzX(),onajStoVodi.dohvatiYpoz()+5*onajStoVodi.dohvatibrzY(),0.4,xkick,ykick,intensity,mozeBezZaust);
+   if (sqrt(pow(onajStoVodi.getVelX() - ball.getXVel(),2)+pow(onajStoVodi.getVelY() - ball.getYVel(),2)) > 1)
+    precisionShot(ball,onajStoVodi.getXPos()+5*onajStoVodi.getVelX(),onajStoVodi.getYPos()+5*onajStoVodi.getVelY(),0.4,xkick,ykick,intensity,mozeBezZaust);
    else  precisionShot(ball,xdest,ydest,2,xkick,ykick,intensity,mozeBezZaust);
   }
 
@@ -1426,8 +1426,8 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
 	 {
 		 bool mozeDodaj, mozeSut, mozeZSut, precisionMoze;
 		 double vremeKontakt,
-			 xDest = dodavani.dohvatiXpoz(),
-			 yDest = dodavani.dohvatiYpoz();
+			 xDest = dodavani.getXPos(),
+			 yDest = dodavani.getYPos();
 
 		 sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,xDest,yDest);
 		 if (mozeSut || mozeZSut)
@@ -1441,7 +1441,7 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
 			 if (mozeSut || mozeZSut)
 			 {
 				 mozeDodaj = true;
-				 precisionShot(lopta,xDest,k_fieldWidth - yDest,7.5,xKick,yKick,intenzitet,precisionMoze);
+				 precisionShot(lopta,xDest,g_fieldWidth - yDest,7.5,xKick,yKick,intenzitet,precisionMoze);
 			 }
 			 else
 			 {
@@ -1449,7 +1449,7 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
 				 if (mozeSut || mozeZSut)
 				 {
 					 mozeDodaj = true;
-					 precisionShot(lopta,xDest,-k_fieldWidth - yDest,7.5,xKick,yKick,intenzitet,precisionMoze);
+					 precisionShot(lopta,xDest,-g_fieldWidth - yDest,7.5,xKick,yKick,intenzitet,precisionMoze);
 				 }
 				 else mozeDodaj = false;
 			 }
@@ -1460,35 +1460,35 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
 
 	 //bool dodajSpec(Ball lopta,Player dodavalac,Player dodavani,Player ap1,Player ap2,double& xKick,double& yKick,double& intenzitet)
 	 //{
-		// Player njihovGornji = (ap1.dohvatiYpoz() > ap2.dohvatiYpoz()) ? ap1 : ap2;
-		// Player njihovDonji = (ap1.dohvatiYpoz() <= ap2.dohvatiYpoz()) ? ap1 : ap2;
+		// Player njihovGornji = (ap1.getYPos() > ap2.getYPos()) ? ap1 : ap2;
+		// Player njihovDonji = (ap1.getYPos() <= ap2.getYPos()) ? ap1 : ap2;
 
 		// bool mozeDodaj, mozeSut, mozeZSut, precisionMoze;
 		// double vremeKontakt;
-		//	 //xDest = dodavani.dohvatiXpoz(),
-		//	 //yDest = dodavani.dohvatiYpoz();
+		//	 //xDest = dodavani.getXPos(),
+		//	 //yDest = dodavani.getYPos();
 
-		// sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,(ap1.dohvatiXpoz() + ap2.dohvatiXpoz())/2,(ap1.dohvatiYpoz() + ap2.dohvatiYpoz())/2);
+		// sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,(ap1.getXPos() + ap2.getXPos())/2,(ap1.getYPos() + ap2.getYPos())/2);
 		// if (mozeSut || mozeZSut)
 		// {
 		//	 mozeDodaj = true;
-		//	 precisionShot(lopta,(ap1.dohvatiXpoz() + ap2.dohvatiXpoz())/2,(ap1.dohvatiYpoz() + ap2.dohvatiYpoz())/2,7.5,xKick,yKick,intenzitet,precisionMoze);
+		//	 precisionShot(lopta,(ap1.getXPos() + ap2.getXPos())/2,(ap1.getYPos() + ap2.getYPos())/2,7.5,xKick,yKick,intenzitet,precisionMoze);
 		// }
 		// else
 		// {
-		//	 sutOpstiGore(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,njihovGornji.dohvatiXpoz(),0.5*njihovGornji.dohvatiYpoz()+0.25*k_fieldWidth);
+		//	 sutOpstiGore(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,njihovGornji.getXPos(),0.5*njihovGornji.getYPos()+0.25*g_fieldWidth);
 		//	 if (mozeSut || mozeZSut)
 		//	 {
 		//		 mozeDodaj = true;
-		//		 precisionShot(lopta,njihovGornji.dohvatiXpoz(),0.5*njihovGornji.dohvatiYpoz()+0.25*k_fieldWidth,7.5,xKick,yKick,intenzitet,precisionMoze);
+		//		 precisionShot(lopta,njihovGornji.getXPos(),0.5*njihovGornji.getYPos()+0.25*g_fieldWidth,7.5,xKick,yKick,intenzitet,precisionMoze);
 		//	 }
 		//	 else
 		//	 {
-		//		 sutOpstiDole(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,njihovDonji.dohvatiXpoz(),0.5*njihovGornji.dohvatiYpoz()-0.25*k_fieldWidth);
+		//		 sutOpstiDole(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,njihovDonji.getXPos(),0.5*njihovGornji.getYPos()-0.25*g_fieldWidth);
 		//		 if (mozeSut || mozeZSut)
 		//		 {
 		//			 mozeDodaj = true;
-		//			 precisionShot(lopta,njihovDonji.dohvatiXpoz(),0.5*njihovGornji.dohvatiYpoz()-0.25*k_fieldWidth,7.5,xKick,yKick,intenzitet,precisionMoze);
+		//			 precisionShot(lopta,njihovDonji.getXPos(),0.5*njihovGornji.getYPos()-0.25*g_fieldWidth,7.5,xKick,yKick,intenzitet,precisionMoze);
 		//		 }
 		//		 else mozeDodaj = false;
 		//	 }
@@ -1502,7 +1502,7 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
   {
     bool moze;
    
-                       //precisionShotMax(ball,k_fieldLength,0,xkick,ykick,intenzitet,moze);
+                       //precisionShotMax(ball,g_fieldLength,0,xkick,ykick,intenzitet,moze);
 
    bool mozeLiGoreOdma,mozeLiGoreSaZaust;
    bool mozeLiDoleOdma,mozeLiDoleSaZaust;
@@ -1529,37 +1529,37 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
    mozeSigurno = true;
 
    if (mozeLiDirektOdma || mozeLiDirektSaZaust)
-   {precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,moze);}// DIREKT
+   {precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,moze);}// DIREKT
 
    else
    {
    
  if (mozeLiDirektGSOdma || mozeLiDirektGSSaZaust)
- {precisionShot(ball,k_fieldLength,k_goalWidth/4+35,7.5,xkick,ykick,intenzitet,moze); }// DIREKT GS
+ {precisionShot(ball,g_fieldLength,g_goalWidth/4+35,7.5,xkick,ykick,intenzitet,moze); }// DIREKT GS
 
  else
   {
     if (mozeLiDirektDSOdma || mozeLiDirektDSSaZaust)
-    {precisionShot(ball,k_fieldLength,-1*k_goalWidth/4-35,7.5,xkick,ykick,intenzitet,moze); }// DIREKT DS
+    {precisionShot(ball,g_fieldLength,-1*g_goalWidth/4-35,7.5,xkick,ykick,intenzitet,moze); }// DIREKT DS
     else
     {
      if (mozeLiDoleOdma || mozeLiDoleSaZaust)
      {
-      precisionShot(ball,k_fieldLength,-1*k_fieldWidth,7.5,xkick,ykick,intenzitet,moze);
+      precisionShot(ball,g_fieldLength,-1*g_fieldWidth,7.5,xkick,ykick,intenzitet,moze);
      }
      else
       if (mozeLiGoreOdma || mozeLiGoreSaZaust)
       {
-       precisionShot(ball,k_fieldLength,k_fieldWidth,7.5,xkick,ykick,intenzitet,moze);
+       precisionShot(ball,g_fieldLength,g_fieldWidth,7.5,xkick,ykick,intenzitet,moze);
       }
       else
       {
      mozeSigurno = false;
-     if (0 == xBlokaMax) {precisionShot(ball,k_fieldLength,k_fieldWidth,7.5,xkick,ykick,intenzitet,moze); /*LogFajl << "GORE" << endl;*/} // GORE
-     if (1 == xBlokaMax) {precisionShot(ball,k_fieldLength,-1*k_fieldWidth,7.5,xkick,ykick,intenzitet,moze);/* LogFajl << "DOLE" << endl;*/}// DOLE
-     if (2 == xBlokaMax) {precisionShot(ball,k_fieldLength,0,7.5,xkick,ykick,intenzitet,moze); /*LogFajl << "DIREKT" << endl;*/}// DIREKT
-     if (3 == xBlokaMax) {precisionShot(ball,k_fieldLength,k_goalWidth/4+20,7.5,xkick,ykick,intenzitet,moze); }// DIREKT GS
-     if (4 == xBlokaMax) {precisionShot(ball,k_fieldLength,-1*k_goalWidth/4-20,7.5,xkick,ykick,intenzitet,moze); }// DIREKT DS
+     if (0 == xBlokaMax) {precisionShot(ball,g_fieldLength,g_fieldWidth,7.5,xkick,ykick,intenzitet,moze); /*LogFajl << "GORE" << endl;*/} // GORE
+     if (1 == xBlokaMax) {precisionShot(ball,g_fieldLength,-1*g_fieldWidth,7.5,xkick,ykick,intenzitet,moze);/* LogFajl << "DOLE" << endl;*/}// DOLE
+     if (2 == xBlokaMax) {precisionShot(ball,g_fieldLength,0,7.5,xkick,ykick,intenzitet,moze); /*LogFajl << "DIREKT" << endl;*/}// DIREKT
+     if (3 == xBlokaMax) {precisionShot(ball,g_fieldLength,g_goalWidth/4+20,7.5,xkick,ykick,intenzitet,moze); }// DIREKT GS
+     if (4 == xBlokaMax) {precisionShot(ball,g_fieldLength,-1*g_goalWidth/4-20,7.5,xkick,ykick,intenzitet,moze); }// DIREKT DS
       }
     }
  }
@@ -1569,15 +1569,15 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
 
 	 bool dodajSpec(Ball lopta,Player dodavalac,Player dodavani,Player ap1,Player ap2,double& xKick,double& yKick,double& intenzitet)
   {
-   Player njihovGornji = (ap1.dohvatiYpoz() > ap2.dohvatiYpoz()) ? ap1 : ap2;
-   Player njihovDonji = (ap1.dohvatiYpoz() <= ap2.dohvatiYpoz()) ? ap1 : ap2;
+   Player njihovGornji = (ap1.getYPos() > ap2.getYPos()) ? ap1 : ap2;
+   Player njihovDonji = (ap1.getYPos() <= ap2.getYPos()) ? ap1 : ap2;
 
    bool mozeDodaj, mozeSut, mozeZSut, precisionMoze;
    double vremeKontakt;
-    //xDest = dodavani.dohvatiXpoz(),
-    //yDest = dodavani.dohvatiYpoz();
+    //xDest = dodavani.getXPos(),
+    //yDest = dodavani.getYPos();
 
-   double trecinax = dodavani.dohvatiXpoz()+(k_fieldLength - dodavani.dohvatiXpoz())/3 , trecinay = dodavani.dohvatiYpoz()/3;
+   double trecinax = dodavani.getXPos()+(g_fieldLength - dodavani.getXPos())/3 , trecinay = dodavani.getYPos()/3;
 
    sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,trecinax,trecinay);
          if (mozeSut || mozeZSut)
@@ -1591,7 +1591,7 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
      if(mozeSut || mozeZSut)
      {
       mozeDodaj = true;
-      precisionShot(lopta,trecinax,k_fieldWidth - trecinay,7.5,xKick,yKick,intenzitet,precisionMoze);
+      precisionShot(lopta,trecinax,g_fieldWidth - trecinay,7.5,xKick,yKick,intenzitet,precisionMoze);
      }
      else
     {
@@ -1599,31 +1599,31 @@ void sutDirektGS(Ball& ball, Player ap1, Player ap2, bool& mozeBezZaustavljanja,
      if (mozeSut || mozeZSut)
      {
       mozeDodaj = true;
-      precisionShot(lopta,trecinax,-k_fieldWidth - trecinay,7.5,xKick,yKick,intenzitet,precisionMoze);
+      precisionShot(lopta,trecinax,-g_fieldWidth - trecinay,7.5,xKick,yKick,intenzitet,precisionMoze);
      }
      else
      {
-       sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,(ap1.dohvatiXpoz() + ap2.dohvatiXpoz())/2,(ap1.dohvatiYpoz() + ap2.dohvatiYpoz())/2);
+       sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,(ap1.getXPos() + ap2.getXPos())/2,(ap1.getYPos() + ap2.getYPos())/2);
        if (mozeSut || mozeZSut)
        {
         mozeDodaj = true;
-        precisionShot(lopta,(ap1.dohvatiXpoz() + ap2.dohvatiXpoz())/2,(ap1.dohvatiYpoz() + ap2.dohvatiYpoz())/2,7.5,xKick,yKick,intenzitet,precisionMoze);
+        precisionShot(lopta,(ap1.getXPos() + ap2.getXPos())/2,(ap1.getYPos() + ap2.getYPos())/2,7.5,xKick,yKick,intenzitet,precisionMoze);
        }
        else
        {
-        sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,njihovGornji.dohvatiXpoz(),0.5*njihovGornji.dohvatiYpoz()+0.25*k_fieldWidth);
+        sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,njihovGornji.getXPos(),0.5*njihovGornji.getYPos()+0.25*g_fieldWidth);
         if (mozeSut || mozeZSut)
         {
          mozeDodaj = true;
-         precisionShot(lopta,njihovGornji.dohvatiXpoz(),0.5*njihovGornji.dohvatiYpoz()+0.25*k_fieldWidth,7.5,xKick,yKick,intenzitet,precisionMoze);
+         precisionShot(lopta,njihovGornji.getXPos(),0.5*njihovGornji.getYPos()+0.25*g_fieldWidth,7.5,xKick,yKick,intenzitet,precisionMoze);
         }
         else
         {
-         sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,njihovDonji.dohvatiXpoz(),0.5*njihovGornji.dohvatiYpoz()-0.25*k_fieldWidth);
+         sutOpstiDirekt(lopta,ap1,ap2,dodavani,mozeSut,mozeZSut,vremeKontakt,njihovDonji.getXPos(),0.5*njihovGornji.getYPos()-0.25*g_fieldWidth);
          if (mozeSut || mozeZSut)
          {
           mozeDodaj = true;
-          precisionShot(lopta,njihovDonji.dohvatiXpoz(),0.5*njihovGornji.dohvatiYpoz()-0.25*k_fieldWidth,7.5,xKick,yKick,intenzitet,precisionMoze);
+          precisionShot(lopta,njihovDonji.getXPos(),0.5*njihovGornji.getYPos()-0.25*g_fieldWidth,7.5,xKick,yKick,intenzitet,precisionMoze);
          }
          else mozeDodaj = false;
         }
